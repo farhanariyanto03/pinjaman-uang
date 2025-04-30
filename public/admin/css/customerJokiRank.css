@@ -1,0 +1,254 @@
+.backround {
+    height: 5000px;
+    width: auto;
+    margin: auto;
+    background-image: linear-gradient(to bottom right,  #34A0A4, #184E77);
+    align-items: center;
+}
+
+.container-layanan {
+    margin: auto;
+    margin-top: 30px;
+}
+.layanan {
+display: flex;
+margin: auto;
+padding: 4px 16px;
+background-color: #184E77;
+height: 40px;
+width: 70%;
+justify-content: center;
+align-items: center;
+}
+
+.layanan-isi-jaminanLayanan1,
+.layanan-isi-jaminanLayanan2,
+.layanan-isi-jaminanLayanan3,
+.layanan-isi-jaminanLayanan4 {
+margin: auto;
+
+}
+
+.okegen1 {
+    margin: auto;
+    display: block; /* Menghindari space tambahan di bawah gambar */
+    width: 100%; /* Lebar gambar akan mengikuti lebar parent elemen */
+    height: auto; /* Tinggi gambar akan menyesuaikan proporsi gambar */
+    padding: 0px;
+}
+
+
+
+
+
+
+
+
+
+.behind {
+    height: 200px;
+    background-color: blue;
+    width: 70%;
+    margin: auto;
+}
+.bgTop {
+
+    width: auto; /* Lebar gambar akan mengikuti lebar parent elemen */
+    height: auto; /* Tinggi gambar akan menyesuaikan proporsi gambar */
+    padding: 0px;
+    margin: auto;
+}
+.bgTop img{
+
+    width: auto; /* Lebar gambar akan mengikuti lebar parent elemen */
+    height: auto; /* Tinggi gambar akan menyesuaikan proporsi gambar */
+    padding: 0px;
+    margin: auto;
+}
+.behindtop {
+    height: 30px;
+    width: 100%;
+    background-color: rgb(197, 255, 255);
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    align-items: center;
+}
+
+.petunjuk {
+    height: 615px;
+    width: 390px;
+    margin-left: 7px;
+    background-color: rgb(0, 255, 170);
+}
+
+.container-right {
+    height: 615px;
+    width: 890px    ;
+    float: right; /* Mulai dari sebelah kanan */
+    margin-right: 7px;
+
+}
+.numberPetunjuk {
+    color: aliceblue;
+    display: flex; /* Menggunakan flexbox */
+    justify-content: center; /* Menengahkan secara horizontal */
+    align-items: center; /* Menengahkan secara vertikal */
+    background-color: #FFCB05;
+    width: 44.44px;
+    height: 100%;
+    font-size: 20px;
+    border-top-left-radius: 5px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+.judulPetunjuk {
+    color: rgb(96, 160, 217);
+    display: flex;
+    font-size: 20px;
+    padding: 8px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
+.container-right1-1,
+.container-right2-1,
+.container-right3-1,
+.container-right4-1 {
+    display: flex;
+    height: 40px;
+    width: 100%;
+    margin-right: 7px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #80ED99; /* Warna latar belakang yang sama */
+}
+
+.container-right1-2,
+.container-right2-2,
+.container-right3-2,
+.container-right4-2 {
+    height: auto;
+    width: auto;
+    background-color: rgb(230, 130, 130);
+
+}
+.container-right2-2 {
+    width: 100%;
+    padding-top: 0px;
+    padding-bottom: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.container-right1-2 {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.container-right2-2,
+.container-right3-2,
+.container-right4-2 {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.containerPetunjuk1-2 {
+    height: auto;
+    width: auto;
+    font-size: 1px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 10px 24px 10px;
+}
+.container-right1-3 {
+    height: auto;
+    width: 20px;
+    background-color: rgb(255, 255, 255);
+}
+
+.container-right1,
+.container-right2,
+.container-right3,
+.container-right4,
+.pesanSekarang {
+    padding-bottom: 40px;
+}
+
+.pesanSekarang1 {
+    height: 40px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(122, 0, 0);
+    color: aliceblue;
+    display: flex;
+    font-size: 15px;
+    font-family:sans-serif
+}
+
+.containerTengah {
+padding: 18px 24px 0px;
+    display: flex;
+}
+
+.containerKiri {
+    flex-grow: 1; /* Biarkan containerKiri menyesuaikan ukurannya */
+    margin-right: 5px; /* Jarak antara containerKiri dan containerKanan */
+    background-color: #80ED99;
+    height: auto;
+}
+
+.containerKanan {
+    flex-grow: 1; /* Biarkan containerKanan menyesuaikan ukurannya */
+    margin-left: 10px; /* Jarak antara containerKanan dan containerKiri */
+    background-color: #FFCB05;
+    height: auto;
+}
+
+
+.container-group1,
+.container-group2 {
+    display: flex; /* Menjadikan grup-grup sebagai flexbox */
+    flex-direction: column; /* Menjadikan anak-anak grup menjadi kolom */
+}
+
+.container-group1 label,
+.container-group2 label {
+    padding: 10px 0px; /* Atas bawah 5px, samping 0px */
+}
+.container-group1Atas label,
+.container-group2Atas label {
+    padding-bottom: 10px;
+    display: flex; /* Menjadikan grup-grup sebagai flexbox */
+    flex-direction: column; /* Menjadikan anak-anak grup menjadi kolom */
+}
+
+
+.container-group1 input,
+.container-group2 input {
+    width: auto; /* Input memanjang secara otomatis */
+    padding: 8px 40px 8px 12px; /* Padding input */
+    border: 1px solid #ccc; /* Garis tepi */
+    border-radius: 5px; /* Sudut yang sedikit bulat */
+    box-sizing: border-box; /* Padding dan border tidak menambah lebar input */
+
+}
+
+
+.namaPaket {
+
+    padding-top: 16px;
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+.judulPaket {
+    margin: 16px 0px 0px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); /* Maksimal 3 elemen per baris */
+    grid-gap: 20px; /* Spasi antara elemen */
+    justify-items: flex-start;
+    grid-auto-flow: row dense; /* Isi baris secara berurutan, memenuhi baris pertama */
+}
+
+
+
+
