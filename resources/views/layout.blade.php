@@ -80,20 +80,20 @@
 
                     <!-- Pinjaman -->
                     <li
-                        class="menu-item {{ Request::is('adminDev/diamondGame') || Request::is('adminDev/jokiML') ? 'active open' : '' }}">
+                        class="menu-item {{ Request::is('karyawan/ajukan-pinjaman') || Request::is('karyawan/data-pinjaman') || Request::is('karyawan/data-pinjaman') ? 'active open' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-game"></i>
                             <div data-i18n="Layouts">Pinjaman</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('adminDev/diamondGame') ? 'active' : '' }}">
-                                <a href="#" class="menu-link">
-                                    <div data-i18n="Without menu">Data Pinjaman</div>
+                            <li class="menu-item {{ Request::is('karyawan/ajukan-pinjaman') ? 'active' : '' }}">
+                                <a href="{{ route('karyawan.ajukan-pinjaman') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Ajukan Pinjaman</div>
                                 </a>
                             </li>
-                            <li class="menu-item {{ Request::is('adminDev/jokiML') ? 'active' : '' }}">
-                                <a href="#" class="menu-link">
-                                    <div data-i18n="Without navbar">Ajukan Pinjaman</div>
+                            <li class="menu-item {{ Request::is('karyawan/data-pinjaman') || Request::is('karyawan/data-pinjaman') ? 'active' : '' }}">
+                                <a href="{{ route('karyawan.data-pinjaman') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Data Pinjaman</div>
                                 </a>
                             </li>
                         </ul>

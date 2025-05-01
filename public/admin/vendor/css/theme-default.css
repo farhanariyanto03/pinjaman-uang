@@ -926,7 +926,7 @@ html:not(.layout-menu-collapsed)
     .menu-sub
     > .menu-item.active
     > .menu-link:not(.menu-toggle):before {
-    background-color: #57cc99 !important;
+    background-color: #696cff !important;
     border: 3px solid #e7e7ff !important;
 }
 
