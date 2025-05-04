@@ -30,8 +30,6 @@
     <link rel="stylesheet" href="{{ asset('admin') }}/vendor/css/theme-default.css"
         class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('admin') }}/css/demo.css" />
-    <link rel="stylesheet" href="{{ asset('css') }}/pemesananDiamond.css" />
-    <link rel="stylesheet" href="{{ asset('css') }}/pemesananJoki.css" />
 
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
 
@@ -70,7 +68,23 @@
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
-                    <!-- Dashboard -->
+                    <!-- Dashboard Admin -->
+                    <li class="menu-item {{ Request::is('admin') ? 'active' : '' }}">
+                        <a href="{{ route('admin.dashboard') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
+
+                    <!-- Pinjaman Admin -->
+                    <li class="menu-item {{ Request::is('admin.pinjaman') ? 'active' : '' }}">
+                        <a href="{{ route('pinjaman.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Pinjaman</div>
+                        </a>
+                    </li>
+
+                    <!-- Dashboard Karyawan -->
                     <li class="menu-item {{ Request::is('karyawan') ? 'active' : '' }}">
                         <a href="{{ route('karyawan.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
@@ -230,7 +244,8 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
-    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <!-- Jquery -->
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js">
     </script>
     <script type="text/javascript" charset="utf8"
@@ -247,8 +262,6 @@
             info: false,
         });
     </script>
-
-
 </body>
 
 </html>
