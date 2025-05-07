@@ -69,7 +69,7 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard Admin -->
-                    <li class="menu-item {{ Request::is('admin') ? 'active' : '' }}">
+                    <li class="menu-item {{ Request::is('adminn') ? 'active' : '' }}">
                         <a href="{{ route('admin.dashboard') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
@@ -77,7 +77,7 @@
                     </li>
 
                     <!-- Pinjaman Admin -->
-                    <li class="menu-item {{ Request::is('admin.pinjaman') ? 'active' : '' }}">
+                    <li class="menu-item {{ Request::is('adminn/pinjaman') ? 'active' : '' }}">
                         <a href="{{ route('pinjaman.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Pinjaman</div>

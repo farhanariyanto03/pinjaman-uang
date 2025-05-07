@@ -1,18 +1,18 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PinjamanController;
 use App\Http\Controllers\Karyawan\DashboardController;
 use App\Http\Controllers\Karyawan\DataPinjamanController;
 use App\Http\Controllers\Karyawan\AjukanPinjamanController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 
 // Route::get('/', function () {
 //     return view('layout');
 // });
 
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+Route::prefix('adminn')->group(function () {
+    Route::get('/', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
     Route::resource('pinjaman', PinjamanController::class);
 });
 
