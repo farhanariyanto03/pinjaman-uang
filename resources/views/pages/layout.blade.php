@@ -84,6 +84,14 @@
                         </a>
                     </li>
 
+                    <!-- Pengajuan Admin -->
+                    <li class="menu-item {{ Request::is('adminn/pengajuan') ? 'active' : '' }}">
+                        <a href="{{ route('admin.pengajuan') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Pengajuan</div>
+                        </a>
+                    </li>
+
                     <!-- Dashboard Karyawan -->
                     <li class="menu-item {{ Request::is('karyawan') ? 'active' : '' }}">
                         <a href="{{ route('karyawan.dashboard') }}" class="menu-link">

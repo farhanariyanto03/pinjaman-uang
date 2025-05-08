@@ -14,7 +14,7 @@ class AjukanPinjamanController extends Controller
 {
     public function index()
     {
-        return view('pages.karyawan.ajukan-pinjaman', [
+        return view('pages.karyawan.ajukan-pinjaman.ajukan-pinjaman', [
             'title' => 'Ajukan Pinjaman',
             'pinjaman' => Pinjaman::all()
         ]);

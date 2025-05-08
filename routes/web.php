@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardAdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PinjamanController;
 use App\Http\Controllers\Karyawan\DashboardController;
+use App\Http\Controllers\Admin\DashboardAdminController;
+use App\Http\Controllers\Admin\PengajuanAdminController;
 use App\Http\Controllers\Karyawan\DataPinjamanController;
 use App\Http\Controllers\Karyawan\AjukanPinjamanController;
 
@@ -14,6 +15,9 @@ use App\Http\Controllers\Karyawan\AjukanPinjamanController;
 Route::prefix('adminn')->group(function () {
     Route::get('/', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
     Route::resource('pinjaman', PinjamanController::class);
+    Route::get('/pengajuan', [PengajuanAdminController::class, 'index'])->name('admin.pengajuan');
+    Route::put('/pengajuan/{id_pengajuan_pinjaman}/diterima', [PengajuanAdminController::class, 'updateStatusDiterima'])->name('admin.pengajuan.diterima');
+    Route::put('/pengajuan/{id_pengajuan_pinjaman}/ditolak', [PengajuanAdminController::class, 'updateStatusDitolak'])->name('admin.pengajuan.ditolak');
 });
 
 

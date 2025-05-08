@@ -35,46 +35,57 @@
                 </ul>
                 <div class="tab-content">
                     @foreach ($pengajuan_pinjaman as $pengajuan)
-                        <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
-                            <div class="d-flex justify-content-between align-items-start mb-4">
-                                <div>
-                                    <h5 class="mb-1 text-black">PIN-{{ $pengajuan->jatuh_tempo }}</h5>
-                                    <small class="text-muted">Pinjaman {{ $pengajuan->detailPinjaman->tujuan_pinjaman }}</small>
-                                </div>
-                                <span class="badge bg-warning">Menunggu</span>
-                            </div>
-                            <div class="row text-sm">
-                                <div class="col-md-4 mb-3">
-                                    <strong class="text-black">Nama Peminjam</strong><br>
-                                    <span class="text-muted">{{ $pengajuan->user->nama }}</span>
-                                </div>
-                                <div class="col-md-4 mb-3 ">
-                                    <strong class="text-black">Tanggal Pengajuan</strong><br>
-                                    <span class="text-muted">{{ $pengajuan->created_at }}</span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <strong class="text-black">Alasan Pengajuan</strong><br>
-                                    <span class="text-muted">{{ $pengajuan->detailPinjaman->alasan_peminjaman }}</span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <strong class="text-black">Tanggal Disetujui</strong><br>
-                                    <span class="text-muted">{{ $pengajuan->updated_at ? $pengajuan->updated_at : '-' }}</span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <strong class="text-black">Jumlah Pinjaman</strong><br>
-                                    <span class="text-muted">Rp. {{ number_format($pengajuan->pinjaman->jumlah_uang, 0, ',', '.') }}</span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <strong class="text-black">Tenor</strong><br>
-                                    <span class="text-muted">{{ $pengajuan->pinjaman->tenor }} bulan</span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <strong class="text-black">Cicilan per Bulan</strong><br>
-                                    <span class="text-muted">Rp. {{ number_format($pengajuan->pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <strong class="text-black">Sisa Cicilan</strong><br>
-                                    <span class="text-muted">{{ $pengajuan->pinjaman->jatuh_tempo - $pengajuan->create_at }} bulan</span>
+                        <div class="col-md-12 mb-4">
+                            <div class="card border">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <div>
+                                            <h5 class="mb-1 text-black">PIN-{{ $pengajuan->jatuh_tempo }}</h5>
+                                            <small class="text-muted">Pinjaman
+                                                {{ $pengajuan->detailPinjaman->tujuan_pinjaman }}</small>
+                                        </div>
+                                        <span class="badge bg-warning">Menunggu</span>
+                                    </div>
+                                    <div class="row text-sm">
+                                        <div class="col-md-6 mb-2">
+                                            <strong class="text-black">Nama Peminjam</strong><br>
+                                            <span class="text-muted">{{ $pengajuan->user->nama }}</span>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <strong class="text-black">Tanggal Pengajuan</strong><br>
+                                            <span class="text-muted">{{ $pengajuan->created_at->format('d M Y') }}</span>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <strong class="text-black">Alasan Pengajuan</strong><br>
+                                            <span
+                                                class="text-muted">{{ $pengajuan->detailPinjaman->alasan_peminjaman }}</span>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <strong class="text-black">Tanggal Disetujui</strong><br>
+                                            <span
+                                                class="text-muted">{{ $pengajuan->updated_at ? $pengajuan->updated_at->format('d M Y') : '-' }}</span>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <strong class="text-black">Jumlah Pinjaman</strong><br>
+                                            <span class="text-muted">Rp.
+                                                {{ number_format($pengajuan->pinjaman->jumlah_uang, 0, ',', '.') }}</span>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <strong class="text-black">Tenor</strong><br>
+                                            <span class="text-muted">{{ $pengajuan->pinjaman->tenor }} bulan</span>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <strong class="text-black">Cicilan per Bulan</strong><br>
+                                            <span class="text-muted">Rp.
+                                                {{ number_format($pengajuan->pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <strong class="text-black">Sisa Cicilan</strong><br>
+                                            <span class="text-muted">
+                                                {{ $pengajuan->sisa_cicilan > 0 ? $pengajuan->sisa_cicilan . ' bulan' : 'Jatuh tempo terlewati' }}
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('alamat');
             $table->char('no_hp', 13);
-            $table->enum('role', ['admin', 'karyawan'])->default('karyawan', );
+            $table->enum('role', ['admin', 'karyawan'])->default('karyawan');
             $table->rememberToken();
             $table->timestamps();
         });

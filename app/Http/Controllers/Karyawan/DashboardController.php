@@ -9,6 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('pages.karyawan.dashboard');
+        return view('pages.karyawan.dashboard.dashboard');
     }
 }
