@@ -13,7 +13,10 @@ class PengajuanAdminController extends Controller
     {
         return view('pages.admin.pengajuan.pengajuan', [
             'title' => 'Pengajuan',
-            'pengajuan' => PengajuanPinjaman::all()
+            'pengajuan_menunggu' => PengajuanPinjaman::where('status', 'menunggu')->get(),
+            'pengajuan_diterima' => PengajuanPinjaman::where('status', 'diterima')->get(),
+            'pengajuan_lunas' => PengajuanPinjaman::where('status', 'lunas')->get(),
+            'pengajuan_ditolak' => PengajuanPinjaman::where('status', 'ditolak')->get(),
         ]);
     }
 

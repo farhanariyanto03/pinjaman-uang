@@ -23,9 +23,17 @@ class DataPinjamanController extends Controller
             $item->sisa_cicilan = $sisaBulan;
         }
 
+        $menunggu = $data->where('status', 'menunggu');
+        $diterima = $data->where('status', 'diterima');
+        $lunas = $data->where('status', 'lunas');
+        $ditolak = $data->where('status', 'ditolak');
+
         return view('pages.karyawan.ajukan-pinjaman.data-pinjaman', [
             'title' => 'Data Pinjaman',
-            'pengajuan_pinjaman' => $data
+            'status_menunggu' => $menunggu,
+            'status_diterima' => $diterima,
+            'status_lunas' => $lunas,
+            'status_ditolak' => $ditolak,
         ]);
     }
 }

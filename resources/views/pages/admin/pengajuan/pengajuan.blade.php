@@ -51,7 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-border-bottom-0">
-                                @foreach ($pengajuan as $p)
+                                @foreach ($pengajuan_menunggu as $p)
                                     <tr>
                                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
                                             <strong>{{ $loop->iteration }}</strong>
@@ -59,8 +59,7 @@
                                         <td>{{ $p->user->nama }}</td>
                                         <td>{{ $p->user->no_hp }}</td>
                                         <td>Rp. {{ number_format($p->pinjaman->jumlah_uang, 0, ',', '.') }}</td>
-                                        <td>{{ $p->pinjaman->tenor }}</td>
-                                        {{-- <td><span class="badge bg-label-primary me-1">{{ $p->pinjaman->bunga }} %</span></td> --}}
+                                        <td>{{ $p->pinjaman->tenor }} Bulan</td>
                                         <td>Rp. {{ number_format($p->pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
                                         </td>
                                         <td>{{ $p->detailPinjaman->alasan_peminjaman }}</td>
@@ -101,13 +100,130 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
-                        <h1>Testt</h1>
+                        <table class="table table-hover large" id="myTable1">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Karyawan</th>
+                                    <th>No HP Karyawan</th>
+                                    <th>Jumlah Uang</th>
+                                    <th>Tenor</th>
+                                    <th>Angsuran Per Bulan</th>
+                                    <th>Alasan Pengajuan</th>
+                                    <th>Tanggal Pengajuan</th>
+                                    <th>Jatuh Tempo</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach ($pengajuan_diterima as $p)
+                                    <tr>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                            <strong>{{ $loop->iteration }}</strong>
+                                        </td>
+                                        <td>{{ $p->user->nama }}</td>
+                                        <td>{{ $p->user->no_hp }}</td>
+                                        <td>Rp. {{ number_format($p->pinjaman->jumlah_uang, 0, ',', '.') }}</td>
+                                        <td>{{ $p->pinjaman->tenor }} Bulan</td>
+                                        <td>Rp. {{ number_format($p->pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
+                                        </td>
+                                        <td>{{ $p->detailPinjaman->alasan_peminjaman }}</td>
+                                        <td>{{ $p->created_at->format('d-m-Y') }}</td>
+                                        <td>{{ $p->updated_at->format('d-m-Y') }}</td>
+                                        <td>
+                                            <span
+                                                class="badge {{ $p->status == 'menunggu' ? 'bg-warning' : ($p->status == 'diterima' ? 'bg-success' : ($p->status == 'lunas' ? 'bg-primary' : ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary'))) }}">
+                                                {{ ucfirst($p->status) }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
-                        <h1>Test</h1>
+                        <table class="table table-hover large" id="myTable2">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Karyawan</th>
+                                    <th>No HP Karyawan</th>
+                                    <th>Jumlah Uang</th>
+                                    <th>Tenor</th>
+                                    <th>Angsuran Per Bulan</th>
+                                    <th>Alasan Pengajuan</th>
+                                    <th>Tanggal Pengajuan</th>
+                                    <th>Jatuh Tempo</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach ($pengajuan_lunas as $p)
+                                    <tr>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                            <strong>{{ $loop->iteration }}</strong>
+                                        </td>
+                                        <td>{{ $p->user->nama }}</td>
+                                        <td>{{ $p->user->no_hp }}</td>
+                                        <td>Rp. {{ number_format($p->pinjaman->jumlah_uang, 0, ',', '.') }}</td>
+                                        <td>{{ $p->pinjaman->tenor }} Bulan</td>
+                                        <td>Rp. {{ number_format($p->pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
+                                        </td>
+                                        <td>{{ $p->detailPinjaman->alasan_peminjaman }}</td>
+                                        <td>{{ $p->created_at->format('d-m-Y') }}</td>
+                                        <td>{{ $p->updated_at->format('d-m-Y') }}</td>
+                                        <td>
+                                            <span
+                                                class="badge {{ $p->status == 'menunggu' ? 'bg-warning' : ($p->status == 'diterima' ? 'bg-success' : ($p->status == 'lunas' ? 'bg-primary' : ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary'))) }}">
+                                                {{ ucfirst($p->status) }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-top-ditolak" role="tabpanel">
-                        <h1>Test</h1>
+                        <table class="table table-hover large" id="myTable3">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Karyawan</th>
+                                    <th>No HP Karyawan</th>
+                                    <th>Jumlah Uang</th>
+                                    <th>Tenor</th>
+                                    <th>Angsuran Per Bulan</th>
+                                    <th>Alasan Pengajuan</th>
+                                    <th>Tanggal Pengajuan</th>
+                                    <th>Jatuh Tempo</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0">
+                                @foreach ($pengajuan_ditolak as $p)
+                                    <tr>
+                                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i>
+                                            <strong>{{ $loop->iteration }}</strong>
+                                        </td>
+                                        <td>{{ $p->user->nama }}</td>
+                                        <td>{{ $p->user->no_hp }}</td>
+                                        <td>Rp. {{ number_format($p->pinjaman->jumlah_uang, 0, ',', '.') }}</td>
+                                        <td>{{ $p->pinjaman->tenor }} Bulan</td>
+                                        <td>Rp. {{ number_format($p->pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
+                                        </td>
+                                        <td>{{ $p->detailPinjaman->alasan_peminjaman }}</td>
+                                        <td>{{ $p->created_at->format('d-m-Y') }}</td>
+                                        <td>{{ $p->updated_at->format('d-m-Y') }}</td>
+                                        <td>
+                                            <span
+                                                class="badge {{ $p->status == 'menunggu' ? 'bg-warning' : ($p->status == 'diterima' ? 'bg-success' : ($p->status == 'lunas' ? 'bg-primary' : ($p->status == 'ditolak' ? 'bg-danger' : 'bg-secondary'))) }}">
+                                                {{ ucfirst($p->status) }}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

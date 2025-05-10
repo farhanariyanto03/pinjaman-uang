@@ -269,6 +269,15 @@
         new DataTable('#myTable', {
             info: false,
         });
+        new DataTable('#myTable1', {
+            info: false,
+        });
+        new DataTable('#myTable2', {
+            info: false,
+        });
+        new DataTable('#myTable3', {
+            info: false,
+        });
     </script>
 </body>
 
