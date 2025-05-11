@@ -15,7 +15,7 @@ class DataPinjamanController extends Controller
 
         foreach ($data as $item) {
             $jatuhTempo = Carbon::parse($item->jatuh_tempo);
-            $dibuat = Carbon::parse($item->created_at);
+            $dibuat = Carbon::parse($item->updated_at);
 
             $sisaBulanDecimal = $dibuat->floatDiffInMonths($jatuhTempo, false);
             $sisaBulan = round($sisaBulanDecimal);

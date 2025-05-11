@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardAdminController;
 use App\Http\Controllers\Admin\PengajuanAdminController;
 use App\Http\Controllers\Karyawan\DataPinjamanController;
 use App\Http\Controllers\Karyawan\AjukanPinjamanController;
+use App\Http\Controllers\Karyawan\CicilanKaryawanController;
 
 // Route::get('/', function () {
 //     return view('layout');
@@ -26,4 +27,5 @@ Route::prefix('karyawan')->group(function () {
     Route::get('/ajukan-pinjaman', [AjukanPinjamanController::class, 'index'])->name('karyawan.ajukan-pinjaman');
     Route::post('/ajukan-pinjaman', [AjukanPinjamanController::class, 'storePengajuan'])->name('karyawan.store-ajukan-pinjaman');
     Route::get('/data-pinjaman', [DataPinjamanController::class, 'index'])->name('karyawan.data-pinjaman');
+    Route::get('/cicilan', [CicilanKaryawanController::class, 'index'])->name('karyawan.cicilan-karyawan');
 });

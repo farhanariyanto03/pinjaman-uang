@@ -122,8 +122,8 @@
                     </li>
 
                     <!-- Pembayaran -->
-                    <li class="menu-item {{ Request::is('adminDev/worker') ? 'active' : '' }}">
-                        <a href="#" class="menu-link">
+                    <li class="menu-item {{ Request::is('karyawan/cicilan-karyawan') ? 'active' : '' }}">
+                        <a href="{{ route('karyawan.cicilan-karyawan') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user"></i>
                             <div data-i18n="Analytics">Cicilan Pinjaman</div>
                         </a>

@@ -56,12 +56,12 @@
                                                 <span class="text-muted">{{ $status_menunggu->user->nama }}</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
-                                                <strong class="text-black">Tanggal status_menunggu</strong><br>
+                                                <strong class="text-black">Tanggal Pengajuan</strong><br>
                                                 <span
                                                     class="text-muted">{{ $status_menunggu->created_at->format('d M Y') }}</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
-                                                <strong class="text-black">Alasan status_menunggu</strong><br>
+                                                <strong class="text-black">Alasan Peminjaman</strong><br>
                                                 <span
                                                     class="text-muted">{{ $status_menunggu->detailPinjaman->alasan_peminjaman }}</span>
                                             </div>
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                         @endforeach
-                        @if (count($status_menunggu) == 0)
+                        @if ($status_menunggu->count() == 0)
                             <p class="d-flex align-items-center justify-content-center">Tidak ada data pengajuan pinjaman
                                 menunggu</p>
                         @endif
