@@ -44,4 +44,9 @@ class CicilanKaryawanController extends Controller
             'cicilan' => $cicilan,
         ]);
     }
+
+    public function pembayaranCicilan()
+    {
+        return view('pages.karyawan.cicilan-karyawan.pembayaran-cicilan');
+    }
 }

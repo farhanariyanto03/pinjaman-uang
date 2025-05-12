@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <a href="#" class="btn btn-primary">Bayar</a>
+                                <a href="{{ route('karyawan.pembayaran-cicilan-karyawan', $c->id) }}" class="btn btn-primary">Bayar</a>
                             </div>
                         </div>
                     </div>
