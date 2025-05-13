@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('jumlah_pembayaran');
             $table->date('tanggal_pembayaran');
             $table->enum('metode_pembayaran', ['transfer', 'potong gaji'])->nullable();
+            $table->text('bukti_tf')->nullable();
             $table->enum('status', ['menunggu', 'diterima', 'ditolak'])->default('menunggu');
             $table->timestamps();
 

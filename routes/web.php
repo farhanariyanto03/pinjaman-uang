@@ -28,5 +28,6 @@ Route::prefix('karyawan')->group(function () {
     Route::post('/ajukan-pinjaman', [AjukanPinjamanController::class, 'storePengajuan'])->name('karyawan.store-ajukan-pinjaman');
     Route::get('/data-pinjaman', [DataPinjamanController::class, 'index'])->name('karyawan.data-pinjaman');
     Route::get('/cicilan', [CicilanKaryawanController::class, 'index'])->name('karyawan.cicilan-karyawan');
-    Route::get('/pembayaran-cicilan', [CicilanKaryawanController::class, 'pembayaranCicilan'])->name('karyawan.pembayaran-cicilan-karyawan');
+    Route::get('/pembayaran-cicilan/{id_pengajuan_pinjaman}', [CicilanKaryawanController::class, 'pembayaranCicilan'])->name('karyawan.pembayaran-cicilan-karyawan');
+    Route::post('/pembayaran-cicilan/store', [CicilanKaryawanController::class, 'storePembayaran'])->name('karyawan.pembayaran-cicilan-karyawan.store');
 });
