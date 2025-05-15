@@ -8,6 +8,7 @@ use App\Models\DetailPengajuan;
 use App\Models\PengajuanPinjaman;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AjukanPinjamanController extends Controller
@@ -22,6 +23,7 @@ class AjukanPinjamanController extends Controller
 
     public function storePengajuan(Request $request)
     {
+        $id_user = Auth::user()->id;
         try {
             $validatedData = $request->validate([
                 'id_pinjaman' => 'required|numeric',
@@ -34,7 +36,7 @@ class AjukanPinjamanController extends Controller
             // Simulasikan created_at sekarang jika belum ada (karena form tidak mengirimkan)
             $createdAt = now();
             $validatedData['jatuh_tempo'] = $createdAt->copy()->addMonths($pinjaman->tenor);
-            $validatedData['id_user'] = 1;
+            $validatedData['id_user'] = $id_user;
             $validatedData['status'] = 'menunggu';
 
             $PengajuanPinjaman = PengajuanPinjaman::create([

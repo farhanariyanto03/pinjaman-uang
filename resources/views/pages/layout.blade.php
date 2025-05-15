@@ -20,7 +20,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="{{ asset('admin') }}/fonts.googleapis.com" />
     <link rel="preconnect" href="{{ asset('admin') }}/fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="{{ asset('admin') }}/fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" />
+    <link rel="stylesheet"
+        href="{{ asset('admin') }}/fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" />
 
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="{{ asset('admin') }}/vendor/fonts/boxicons.css" />
@@ -68,74 +69,77 @@
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
-                    <!-- Dashboard Admin -->
-                    <li class="menu-item {{ Request::is('adminn') ? 'active' : '' }}">
-                        <a href="{{ route('admin.dashboard') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Dashboard</div>
-                        </a>
-                    </li>
+                    @if (Auth::user()->role == 'admin')
+                        <!-- Dashboard Admin -->
+                        <li class="menu-item {{ Request::is('adminn') ? 'active' : '' }}">
+                            <a href="{{ route('admin.dashboard') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <div data-i18n="Analytics">Dashboard</div>
+                            </a>
+                        </li>
 
-                    <!-- Pinjaman Admin -->
-                    <li class="menu-item {{ Request::is('adminn/pinjaman') ? 'active' : '' }}">
-                        <a href="{{ route('pinjaman.index') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Pinjaman</div>
-                        </a>
-                    </li>
+                        <!-- Pinjaman Admin -->
+                        <li class="menu-item {{ Request::is('adminn/pinjaman') ? 'active' : '' }}">
+                            <a href="{{ route('pinjaman.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <div data-i18n="Analytics">Pinjaman</div>
+                            </a>
+                        </li>
 
-                    <!-- Pengajuan Admin -->
-                    <li class="menu-item {{ Request::is('adminn/pengajuan') ? 'active' : '' }}">
-                        <a href="{{ route('admin.pengajuan') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Pengajuan</div>
-                        </a>
-                    </li>
+                        <!-- Pengajuan Admin -->
+                        <li class="menu-item {{ Request::is('adminn/pengajuan') ? 'active' : '' }}">
+                            <a href="{{ route('admin.pengajuan') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <div data-i18n="Analytics">Pengajuan</div>
+                            </a>
+                        </li>
+                    @else
+                        <!-- Dashboard Karyawan -->
+                        <li class="menu-item {{ Request::is('karyawan') ? 'active' : '' }}">
+                            <a href="{{ route('karyawan.dashboard') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <div data-i18n="Analytics">Dashboard</div>
+                            </a>
+                        </li>
 
-                    <!-- Dashboard Karyawan -->
-                    <li class="menu-item {{ Request::is('karyawan') ? 'active' : '' }}">
-                        <a href="{{ route('karyawan.dashboard') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Dashboard</div>
-                        </a>
-                    </li>
+                        <!-- Pinjaman -->
+                        <li
+                            class="menu-item {{ Request::is('karyawan/ajukan-pinjaman') || Request::is('karyawan/data-pinjaman') || Request::is('karyawan/data-pinjaman') ? 'active open' : '' }}">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-game"></i>
+                                <div data-i18n="Layouts">Pinjaman</div>
+                            </a>
+                            <ul class="menu-sub">
+                                <li class="menu-item {{ Request::is('karyawan/ajukan-pinjaman') ? 'active' : '' }}">
+                                    <a href="{{ route('karyawan.ajukan-pinjaman') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Ajukan Pinjaman</div>
+                                    </a>
+                                </li>
+                                <li
+                                    class="menu-item {{ Request::is('karyawan/data-pinjaman') || Request::is('karyawan/data-pinjaman') ? 'active' : '' }}">
+                                    <a href="{{ route('karyawan.data-pinjaman') }}" class="menu-link">
+                                        <div data-i18n="Without navbar">Data Pinjaman</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-                    <!-- Pinjaman -->
-                    <li
-                        class="menu-item {{ Request::is('karyawan/ajukan-pinjaman') || Request::is('karyawan/data-pinjaman') || Request::is('karyawan/data-pinjaman') ? 'active open' : '' }}">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-game"></i>
-                            <div data-i18n="Layouts">Pinjaman</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item {{ Request::is('karyawan/ajukan-pinjaman') ? 'active' : '' }}">
-                                <a href="{{ route('karyawan.ajukan-pinjaman') }}" class="menu-link">
-                                    <div data-i18n="Without menu">Ajukan Pinjaman</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('karyawan/data-pinjaman') || Request::is('karyawan/data-pinjaman') ? 'active' : '' }}">
-                                <a href="{{ route('karyawan.data-pinjaman') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Data Pinjaman</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                        <!-- Pembayaran -->
+                        <li class="menu-item {{ Request::is('karyawan/cicilan') ? 'active' : '' }}">
+                            <a href="{{ route('karyawan.cicilan-karyawan') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <div data-i18n="Analytics">Cicilan Pinjaman</div>
+                            </a>
+                        </li>
 
-                    <!-- Pembayaran -->
-                    <li class="menu-item {{ Request::is('karyawan/cicilan-karyawan') ? 'active' : '' }}">
-                        <a href="{{ route('karyawan.cicilan-karyawan') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
-                            <div data-i18n="Analytics">Cicilan Pinjaman</div>
-                        </a>
-                    </li>
-
-                    <!-- Pembatalan -->
-                    <li class="menu-item {{ Request::is('adminDev/worker') ? 'active' : '' }}">
-                        <a href="#" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user"></i>
-                            <div data-i18n="Analytics">Pembatalan Pinajaman</div>
-                        </a>
-                    </li>
+                        <!-- Pembatalan -->
+                        <li class="menu-item {{ Request::is('adminDev/worker') ? 'active' : '' }}">
+                            <a href="#" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <div data-i18n="Analytics">Pembatalan Pinajaman</div>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -164,7 +168,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="#" alt class="w-px-30 h-auto rounded-circle" />
+                                        <img src="{{ asset('admin/img/avatars/1.png') }}" alt class="w-px-30 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -173,7 +177,7 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="#" alt
+                                                        <img src="{{ asset('admin/img/avatars/1.png') }}" alt
                                                             class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
@@ -196,7 +200,7 @@
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('logout') }}">
                                         <li>
                                             <i class="bx bx-power-off me-2"></i>
                                             <span class="align-middle">Log Out</span>

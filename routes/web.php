@@ -8,10 +8,16 @@ use App\Http\Controllers\Admin\PengajuanAdminController;
 use App\Http\Controllers\Karyawan\DataPinjamanController;
 use App\Http\Controllers\Karyawan\AjukanPinjamanController;
 use App\Http\Controllers\Karyawan\CicilanKaryawanController;
+use App\Http\Controllers\LoginController;
 
 // Route::get('/', function () {
 //     return view('layout');
 // });
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/cekLogin', [LoginController::class, 'login'])->name('cekLogin');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/register', [LoginController::class, 'register'])->name('register');
 
 Route::prefix('adminn')->group(function () {
     Route::get('/', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
