@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('pengajuan_pinjamans', function (Blueprint $table) {
             $table->bigIncrements('id_pengajuan_pinjaman');
-            $table->unsignedBigInteger('id_pinjaman');
             $table->unsignedBigInteger('id_user');
+            $table->bigInteger('jumlah_pinjaman');
+            $table->bigInteger('tenor');
+            $table->bigInteger('bunga');
+            $table->bigInteger('jumlah_kotor');
+            $table->bigInteger('angsuran_per_bulanan');
             $table->date('jatuh_tempo');
             $table->enum('status', ['menunggu', 'diterima', 'lunas', 'ditolak'])->default('menunggu');
             $table->timestamps();
 
-            $table->foreign('id_pinjaman')->references('id_pinjaman')->on('pinjamans')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('id_pinjaman')->references('id_pinjaman')->on('pinjamans')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }

@@ -79,12 +79,12 @@
                         </li>
 
                         <!-- Pinjaman Admin -->
-                        <li class="menu-item {{ Request::is('adminn/pinjaman') ? 'active' : '' }}">
+                        {{-- <li class="menu-item {{ Request::is('adminn/pinjaman') ? 'active' : '' }}">
                             <a href="{{ route('pinjaman.index') }}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                                 <div data-i18n="Analytics">Pinjaman</div>
                             </a>
-                        </li>
+                        </li> --}}
 
                         <!-- Pengajuan Admin -->
                         <li class="menu-item {{ Request::is('adminn/pengajuan') ? 'active' : '' }}">

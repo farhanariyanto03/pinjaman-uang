@@ -21,7 +21,7 @@ Route::get('/register', [LoginController::class, 'register'])->name('register');
 
 Route::prefix('adminn')->group(function () {
     Route::get('/', [DashboardAdminController::class, 'index'])->name('admin.dashboard');
-    Route::resource('pinjaman', PinjamanController::class);
+    // Route::resource('pinjaman', PinjamanController::class);
     Route::get('/pengajuan', [PengajuanAdminController::class, 'index'])->name('admin.pengajuan');
     Route::put('/pengajuan/{id_pengajuan_pinjaman}/diterima', [PengajuanAdminController::class, 'updateStatusDiterima'])->name('admin.pengajuan.diterima');
     Route::put('/pengajuan/{id_pengajuan_pinjaman}/ditolak', [PengajuanAdminController::class, 'updateStatusDitolak'])->name('admin.pengajuan.ditolak');
