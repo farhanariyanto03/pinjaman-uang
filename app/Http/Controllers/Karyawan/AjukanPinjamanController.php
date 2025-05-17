@@ -17,7 +17,6 @@ class AjukanPinjamanController extends Controller
     {
         return view('pages.karyawan.ajukan-pinjaman.ajukan-pinjaman', [
             'title' => 'Ajukan Pinjaman',
-            'pinjaman' => Pinjaman::all()
         ]);
     }
 
@@ -26,16 +25,16 @@ class AjukanPinjamanController extends Controller
         $id_user = Auth::user()->id;
         try {
             $validatedData = $request->validate([
-                'id_pinjaman' => 'required|numeric',
+                'jumlah_pinjaman' => 'required|numeric',
                 'tujuan_pinjaman' => 'required',
                 'alasan_peminjaman' => 'required',
             ]);
 
-            $pinjaman = Pinjaman::findOrFail($validatedData['id_pinjaman']);
+            // $pinjaman = Pinjaman::findOrFail($validatedData['id_pinjaman']);
 
             // Simulasikan created_at sekarang jika belum ada (karena form tidak mengirimkan)
             $createdAt = now();
-            $validatedData['jatuh_tempo'] = $createdAt->copy()->addMonths($pinjaman->tenor);
+            // $validatedData['jatuh_tempo'] = $createdAt->copy()->addMonths($pinjaman->tenor);
             $validatedData['id_user'] = $id_user;
             $validatedData['status'] = 'menunggu';
 

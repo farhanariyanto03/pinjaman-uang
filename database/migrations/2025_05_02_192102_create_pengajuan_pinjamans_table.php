@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->bigInteger('jumlah_pinjaman');
             $table->bigInteger('tenor');
-            $table->bigInteger('bunga');
-            $table->bigInteger('jumlah_kotor');
-            $table->bigInteger('angsuran_per_bulanan');
+            $table->bigInteger('bunga')->nullable();
+            $table->bigInteger('jumlah_kotor')->nullable();
+            $table->bigInteger('angsuran_per_bulanan')->nullable();
             $table->date('jatuh_tempo');
             $table->enum('status', ['menunggu', 'diterima', 'lunas', 'ditolak'])->default('menunggu');
             $table->timestamps();

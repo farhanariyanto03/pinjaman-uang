@@ -23,7 +23,8 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Jumlah Pinjaman (Rp)</label>
-                        <select class="form-select" id="selectPinjaman" name="id_pinjaman" aria-label="Default select example">
+                        <input class="form-control" type="number" name="jumlah_pinjaman" id="inputTenor" placeholder="" />
+                        {{-- <select class="form-select" id="selectPinjaman" name="id_pinjaman" aria-label="Default select example">
                             <option selected><--- Pilih Pinjaman ---></option>
                             @foreach ($pinjaman as $p)
                                 <option value="{{ $p->id_pinjaman }}" data-tenor="{{ $p->tenor }}"
@@ -31,16 +32,31 @@
                                     Rp. {{ number_format($p->jumlah_uang, 0, ',', '.') }}
                                 </option>
                             @endforeach
-                        </select>
+                        </select> --}}
                     </div>
                     <div class="mb-3">
                         <label for="inputTenor" class="form-label">Tenor Pinjaman (Bulan)</label>
-                        <input class="form-control" type="text" name="tenor" id="inputTenor" placeholder="" readonly />
+                        <select class="form-select" name="tenor" id="exampleFormControlSelect1"
+                            aria-label="Default select example">
+                            <option selected><--- Pilih Tenor Pinjaman ---></option>
+                            <option value="1">1 Bulan</option>
+                            <option value="2">2 Bulan</option>
+                            <option value="3">3 Bulan</option>
+                            <option value="4">4 Bulan</option>
+                            <option value="5">5 Bulan</option>
+                            <option value="6">6 Bulan</option>
+                            <option value="7">7 Bulan</option>
+                            <option value="8">8 Bulan</option>
+                            <option value="9">9 Bulan</option>
+                            <option value="10">10 Bulan</option>
+                            <option value="11">11 Bulan</option>
+                            <option value="12">12 Bulan</option>
+                        </select>
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="inputBunga" class="form-label">Bunga Pinjaman (%)</label>
                         <input class="form-control" type="text" name="bunga" id="inputBunga" placeholder="" readonly />
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Tujuan Pinjaman</label>
                         <select class="form-select" name="tujuan_pinjaman" id="exampleFormControlSelect1"
