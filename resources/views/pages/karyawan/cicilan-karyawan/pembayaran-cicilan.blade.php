@@ -18,18 +18,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
-            <form action="{{ route('karyawan.pembayaran-cicilan-karyawan.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('karyawan.pembayaran-cicilan-karyawan.store') }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <label class="form-label mb-3">Metode Pembayaran</label>
-                    <input type="hidden" name="id_pengajuan_pinjaman" value="{{ $cicilan->id_pengajuan_pinjaman }}" readonly>
+                    <input type="hidden" name="id_pengajuan_pinjaman" value="{{ $cicilan->id_pengajuan_pinjaman }}"
+                        readonly>
 
                     <!-- Transfer Manual -->
                     <div class="form-check border rounded p-3 mb-2">
                         <input class="form-check-input" type="radio" name="metode_pembayaran" id="transferManual"
                             value="transfer" checked>
                         <label class="form-check-label fw-bold" for="transferManual">
-                            Transfer Manual
+                            Transfer
                         </label>
                         <div class="text-muted ms-4">Lakukan pembayaran melalui transfer bank dan upload bukti pembayaran
                         </div>
@@ -48,18 +50,21 @@
                     <!-- Informasi Rekening -->
                     <div class="border rounded p-3 mt-3" id="informasiRekening">
                         <h6 class="fw-bold">Informasi Rekening</h6>
-                        <div class="row">
-                            <div class="col-4">Bank</div>
-                            <div class="col-8">: Bank Mandiri</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">Nomor Rekening</div>
-                            <div class="col-8">: 1234567890</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">Atas Nama</div>
-                            <div class="col-8">: PT Sistem Pinjaman</div>
-                        </div>
+                        @foreach ($bank as $b)
+                            <div class="row">
+                                <div class="col-4">Bank</div>
+                                <div class="col-8">: {{ $b->nama_bank }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">Nomor Rekening</div>
+                                <div class="col-8">: {{ $b->nomor_rekening }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">Atas Nama</div>
+                                <div class="col-8">: {{ $b->nama_rekening }}</div>
+                            </div>
+                            <hr>
+                        @endforeach
                     </div>
 
                     <!-- Upload Bukti Pembayaran (hanya untuk transfer) -->
@@ -72,7 +77,7 @@
                     <div class="mt-3" id="jumlahUangSection">
                         <label for="jumlahUang" class="form-label fw-bold">Jumlah Uang Yang Harus Dibayar</label>
                         <input type="number" class="form-control" name="jumlah_uang" id="jumlahUang"
-                            placeholder="Masukkan jumlah" value="{{ $cicilan->pinjaman->angsuran_per_bulan }}" readonly/>
+                            placeholder="Masukkan jumlah" value="{{ $cicilan->angsuran_per_bulanan }}" readonly />
                     </div>
                     <button class="btn btn-primary mt-3 w-100" type="submit">Ajukan Pinjaman</button>
                 </div>

@@ -23,7 +23,6 @@ return new class extends Migration
             $table->enum('status', ['menunggu', 'diterima', 'lunas', 'ditolak'])->default('menunggu');
             $table->timestamps();
 
-            // $table->foreign('id_pinjaman')->references('id_pinjaman')->on('pinjamans')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }

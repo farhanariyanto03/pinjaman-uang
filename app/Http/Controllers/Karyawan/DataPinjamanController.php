@@ -6,22 +6,38 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\PengajuanPinjaman;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DataPinjamanController extends Controller
 {
     public function index()
     {
-        $data = PengajuanPinjaman::with('pinjaman')->get();
+        $userId = Auth::id();
+
+        $data = PengajuanPinjaman::with('pembayaranPinjaman')
+            ->where('id_user', $userId)
+            ->get();
 
         foreach ($data as $item) {
             $jatuhTempo = Carbon::parse($item->jatuh_tempo);
             $dibuat = Carbon::parse($item->updated_at);
 
             $sisaBulanDecimal = $dibuat->floatDiffInMonths($jatuhTempo, false);
-            $sisaBulan = round($sisaBulanDecimal);
+            $totalSisaBulan = round($sisaBulanDecimal);
 
-            $item->sisa_cicilan = $sisaBulan;
+            // Hitung jumlah cicilan yang telah dibayar berdasarkan status 'diterima'
+            $cicilanDibayar = $item->pembayaranPinjaman->where('status', 'diterima')->count();
+
+            // Kurangi sisa bulan dengan jumlah cicilan yang sudah dibayar
+            $sisaCicilan = max($totalSisaBulan - $cicilanDibayar, 0);
+
+            $item->sisa_cicilan = $sisaCicilan;
         }
+
+        // Filter data berdasarkan status dan sisa_cicilan
+        $diterima = $data->filter(function ($item) {
+            return $item->status === 'diterima' && $item->sisa_cicilan > 0;
+        });
 
         $menunggu = $data->where('status', 'menunggu');
         $diterima = $data->where('status', 'diterima');

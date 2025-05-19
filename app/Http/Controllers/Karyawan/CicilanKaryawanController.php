@@ -8,88 +8,60 @@ use App\Models\PengajuanPinjaman;
 use App\Models\PembayaranPinjaman;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\Bank;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CicilanKaryawanController extends Controller
 {
     public function index()
     {
-        $today = Carbon::today();
+        $userId = Auth::id();
 
-        $cicilanBelumLunas = PengajuanPinjaman::with(['user', 'pinjaman', 'detailPinjaman', 'pembayaranPinjaman'])
-            ->where('status', 'diterima')
-            ->whereHas('pembayaranPinjaman', function ($query) use ($today) {
-                $query->where('status', 'menunggu');
-            })
-            ->get()
-            ->map(function ($item) use ($today) {
-                $approvedDate = Carbon::parse($item->updated_at);
-                $tenor = $item->pinjaman->tenor ?? 0;
+        $data = PengajuanPinjaman::with('pembayaranPinjaman')
+            ->where('id_user', $userId)
+            ->get();
 
-                // Hitung bulan yang sudah berjalan sejak disetujui
-                $monthsPassed = $approvedDate->diffInMonths($today);
+        foreach ($data as $item) {
+            $jatuhTempo = Carbon::parse($item->jatuh_tempo);
+            $dibuat = Carbon::parse($item->updated_at);
 
-                // Ambil jumlah pembayaran yang sudah diterima
-                $paidMonths = $item->pembayaranPinjaman
-                    ->where('status', 'diterima')
-                    ->count();
+            $sisaBulanDecimal = $dibuat->floatDiffInMonths($jatuhTempo, false);
+            $totalSisaBulan = round($sisaBulanDecimal);
 
-                // Hitung sisa cicilan berdasarkan tenor dan jumlah pembayaran
-                $sisaCicilan = $tenor - $paidMonths;
+            // Hitung jumlah cicilan yang telah dibayar berdasarkan status 'diterima'
+            $cicilanDibayar = $item->pembayaranPinjaman->where('status', 'diterima')->count();
 
-                // Jika sudah lebih dari tenor bulan dan belum lunas, bisa dianggap lewat jatuh tempo
-                $item->sisa_cicilan = max($sisaCicilan, 0);
-                $item->bulan_berjalan = $monthsPassed;
-                $item->harus_bayar_bulan_ini = $paidMonths < $monthsPassed;
+            // Kurangi sisa bulan dengan jumlah cicilan yang sudah dibayar
+            $sisaCicilan = max($totalSisaBulan - $cicilanDibayar, 0);
 
-                return $item;
-            });
+            $item->sisa_cicilan = $sisaCicilan;
+        }
 
-        $cicilanLunas = PengajuanPinjaman::with(['user', 'pinjaman', 'detailPinjaman', 'pembayaranPinjaman'])
-            ->where('status', 'diterima')
-            ->whereHas('pembayaranPinjaman', function ($query) use ($today) {
-                $query->where('status', 'diterima');
-            })
-            ->get()
-            ->map(function ($item) use ($today) {
-                $approvedDate = Carbon::parse($item->updated_at);
-                $tenor = $item->pinjaman->tenor ?? 0;
+        // Filter data berdasarkan status dan sisa_cicilan
+        $diterima = $data->filter(function ($item) {
+            return $item->status === 'diterima' && $item->sisa_cicilan > 0;
+        });
 
-                // Hitung bulan yang sudah berjalan sejak disetujui
-                $monthsPassed = $approvedDate->diffInMonths($today);
-
-                // Ambil jumlah pembayaran yang sudah diterima
-                $paidMonths = $item->pembayaranPinjaman
-                    ->where('status', 'diterima')
-                    ->count();
-
-                // Hitung sisa cicilan berdasarkan tenor dan jumlah pembayaran
-                $sisaCicilan = $tenor - $paidMonths;
-
-                // Jika sudah lebih dari tenor bulan dan belum lunas, bisa dianggap lewat jatuh tempo
-                $item->sisa_cicilan = max($sisaCicilan, 0);
-                $item->bulan_berjalan = $monthsPassed;
-                $item->harus_bayar_bulan_ini = $paidMonths < $monthsPassed;
-
-                return $item;
-            });
+        // $lunas = $data->where('status', 'lunas');
+        $ditolak = $data->where('status', 'ditolak');
 
         return view('pages.karyawan.cicilan-karyawan.cicilan-karyawan', [
             'title' => 'Cicilan Karyawan',
-            'cicilanBelumLunas' => $cicilanBelumLunas,
-            'cicilanLunas' => $cicilanLunas,
+            'cicilanBelumLunas' => $diterima,
+            // 'cicilanLunas' => $lunas,
+            'cicilanDitolak' => $ditolak
         ]);
     }
 
     public function pembayaranCicilan(string $id)
     {
-        $cicilan = PengajuanPinjaman::with('pinjaman')
-            ->where('id_pengajuan_pinjaman', $id)
-            ->first();
+        $cicilan = PengajuanPinjaman::where('id_pengajuan_pinjaman', $id)->first();
 
         return view('pages.karyawan.cicilan-karyawan.pembayaran-cicilan', [
             'title' => 'Pembayaran Cicilan',
             'cicilan' => $cicilan,
+            'bank' => Bank::all(),
         ]);
     }
 

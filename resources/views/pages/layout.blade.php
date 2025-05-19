@@ -93,6 +93,13 @@
                                 <div data-i18n="Analytics">Pengajuan</div>
                             </a>
                         </li>
+
+                        <li class="menu-item {{ Request::is('adminn/bank') ? 'active' : '' }}">
+                            <a href="{{ route('bank.index') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <div data-i18n="Analytics">Bank</div>
+                            </a>
+                        </li>
                     @else
                         <!-- Dashboard Karyawan -->
                         <li class="menu-item {{ Request::is('karyawan') ? 'active' : '' }}">

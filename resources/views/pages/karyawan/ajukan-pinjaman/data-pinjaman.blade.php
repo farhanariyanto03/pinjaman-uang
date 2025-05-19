@@ -73,24 +73,24 @@
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Jumlah Pinjaman</strong><br>
                                                 <span class="text-muted">Rp.
-                                                    {{ number_format($status_menunggu->pinjaman->jumlah_uang, 0, ',', '.') }}</span>
+                                                    {{ number_format($status_menunggu->jumlah_pinjaman, 0, ',', '.') }}</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Tenor</strong><br>
-                                                <span class="text-muted">{{ $status_menunggu->pinjaman->tenor }}
+                                                <span class="text-muted">{{ $status_menunggu->tenor }}
                                                     bulan</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Cicilan per Bulan</strong><br>
                                                 <span class="text-muted">Rp.
-                                                    {{ number_format($status_menunggu->pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
+                                                    {{ number_format($status_menunggu->angsuran_per_bulan, 0, ',', '.') }}</span>
                                             </div>
-                                            <div class="col-md-6 mb-2">
+                                            {{-- <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Sisa Cicilan</strong><br>
                                                 <span class="text-muted">
                                                     {{ $status_menunggu->sisa_cicilan > 0 ? $status_menunggu->sisa_cicilan . ' bulan' : 'Jatuh tempo terlewati' }}
                                                 </span>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -141,16 +141,16 @@
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Jumlah Pinjaman</strong><br>
                                                 <span class="text-muted">Rp.
-                                                    {{ number_format($pinjaman->pinjaman->jumlah_uang, 0, ',', '.') }}</span>
+                                                    {{ number_format($pinjaman->jumlah_pinjaman, 0, ',', '.') }}</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Tenor</strong><br>
-                                                <span class="text-muted">{{ $pinjaman->pinjaman->tenor }} bulan</span>
+                                                <span class="text-muted">{{ $pinjaman->tenor }} bulan</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Cicilan per Bulan</strong><br>
                                                 <span class="text-muted">Rp.
-                                                    {{ number_format($pinjaman->pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
+                                                    {{ number_format($pinjaman->angsuran_per_bulanan, 0, ',', '.') }}</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Sisa Cicilan</strong><br>
@@ -208,16 +208,16 @@
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Jumlah Pinjaman</strong><br>
                                                 <span class="text-muted">Rp.
-                                                    {{ number_format($pinjaman->pinjaman->jumlah_uang, 0, ',', '.') }}</span>
+                                                    {{ number_format($pinjaman->jumlah_uang, 0, ',', '.') }}</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Tenor</strong><br>
-                                                <span class="text-muted">{{ $pinjaman->pinjaman->tenor }} bulan</span>
+                                                <span class="text-muted">{{ $pinjaman->tenor }} bulan</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Cicilan per Bulan</strong><br>
                                                 <span class="text-muted">Rp.
-                                                    {{ number_format($pinjaman->pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
+                                                    {{ number_format($pinjaman->angsuran_per_bulan, 0, ',', '.') }}</span>
                                             </div>
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Sisa Cicilan</strong><br>
