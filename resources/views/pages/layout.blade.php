@@ -78,13 +78,12 @@
                             </a>
                         </li>
 
-                        <!-- Pinjaman Admin -->
-                        {{-- <li class="menu-item {{ Request::is('adminn/pinjaman') ? 'active' : '' }}">
-                            <a href="{{ route('pinjaman.index') }}" class="menu-link">
+                        <li class="menu-item {{ Request::is('adminn/bunga-pinjaman') ? 'active' : '' }}">
+                            <a href="{{ route('admin.bunga') }}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                                <div data-i18n="Analytics">Pinjaman</div>
+                                <div data-i18n="Analytics">Bunga</div>
                             </a>
-                        </li> --}}
+                        </li>
 
                         <!-- Pengajuan Admin -->
                         <li class="menu-item {{ Request::is('adminn/pengajuan') ? 'active' : '' }}">
@@ -98,6 +97,13 @@
                             <a href="{{ route('bank.index') }}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                                 <div data-i18n="Analytics">Bank</div>
+                            </a>
+                        </li>
+
+                        <li class="menu-item {{ Request::is('adminn/cicilan') ? 'active' : '' }}">
+                            <a href="{{ route('admin.cicilan') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <div data-i18n="Analytics">Pembayaran</div>
                             </a>
                         </li>
                     @else
@@ -140,8 +146,8 @@
                         </li>
 
                         <!-- Pembatalan -->
-                        <li class="menu-item {{ Request::is('adminDev/worker') ? 'active' : '' }}">
-                            <a href="#" class="menu-link">
+                        <li class="menu-item {{ Request::is('karyawan/pembatalan') ? 'active' : '' }}">
+                            <a href="{{ route('karyawan.pembatalan-pengajuan') }}" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-user"></i>
                                 <div data-i18n="Analytics">Pembatalan Pinajaman</div>
                             </a>

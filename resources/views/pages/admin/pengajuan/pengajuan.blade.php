@@ -72,7 +72,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                {{-- <form
+                                                <form
                                                     action="{{ route('admin.pengajuan.diterima', $p->id_pengajuan_pinjaman) }}"
                                                     method="POST" class="me-2">
                                                     @csrf
@@ -81,12 +81,12 @@
                                                         class="btn btn-icon btn-outline-success px-3">
                                                         <i class='bx bx-check'></i>
                                                     </button>
-                                                </form> --}}
-                                                <button type="button" class="btn btn-icon btn-outline-warning me-2"
+                                                </form>
+                                                {{-- <button type="button" class="btn btn-icon btn-outline-warning me-2"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#editPengajuan{{ $p->id_pengajuan_pinjaman }}">
                                                     <i class="bx bx-pen"></i>
-                                                </button>
+                                                </button> --}}
                                                 <form
                                                     action="{{ route('admin.pengajuan.ditolak', $p->id_pengajuan_pinjaman) }}"
                                                     method="POST">
@@ -237,7 +237,7 @@
         </div>
     </div>
 
-    @foreach ($pengajuan_menunggu as $p)
+    {{-- @foreach ($pengajuan_menunggu as $p)
         <div class="modal fade" id="editPengajuan{{ $p->id_pengajuan_pinjaman }}" data-bs-backdrop="static" tabindex="-1">
             <div class="modal-dialog">
                 <form action="{{ route('admin.pengajuan.diterima', $p->id_pengajuan_pinjaman) }}" method="POST">
@@ -264,6 +264,6 @@
                 </form>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
     @include('sweetalert::alert')
 @endsection

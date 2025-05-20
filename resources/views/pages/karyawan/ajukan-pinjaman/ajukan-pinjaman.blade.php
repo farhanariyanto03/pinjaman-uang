@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Pengajuan -->
-    <div class="col-md-8 offset-md-2">
+    <div class="col-md-6">
         <div class="card mb-4">
             <div class="card-header">
                 <h2 class="mb-1">Formulir Pengajuan</h2>
@@ -23,12 +23,12 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Jumlah Pinjaman (Rp)</label>
-                        <input class="form-control" type="number" name="jumlah_pinjaman" id="inputTenor" placeholder="" />
+                        <input class="form-control" type="number" name="jumlah_pinjaman" id="jumlahPinjaman"
+                            placeholder="" />
                     </div>
                     <div class="mb-3">
                         <label for="inputTenor" class="form-label">Tenor Pinjaman (Bulan)</label>
-                        <select class="form-select" name="tenor" id="exampleFormControlSelect1"
-                            aria-label="Default select example">
+                        <select class="form-select" name="tenor" id="tenorPinjaman" aria-label="Default select example">
                             <option selected><--- Pilih Tenor Pinjaman ---></option>
                             <option value="1">1 Bulan</option>
                             <option value="2">2 Bulan</option>
@@ -60,20 +60,104 @@
                         <label for="exampleFormControlTextarea1" class="form-label">Alasan Pengajuan</label>
                         <textarea class="form-control" name="alasan_peminjaman" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
-                    <div class="alert alert-secondary mt-4" role="alert">
-                        <h6 class="alert-heading fw-bold mb-2">Catatan Penting:</h6>
-                        <ul class="mb-0 ps-3">
-                            <li>Pengajuan akan diproses dalam 3–5 hari kerja</li>
-                            <li>Pastikan data yang diisi sudah benar</li>
-                            <li>Jika sudah megirim data pinjaman silahkan ke halaman data pinjaman untuk menunggu
-                                persetujuan
-                            </li>
-                        </ul>
-                    </div>
                     <button class="btn btn-primary mt-3 w-100" type="submit">Ajukan Pinjaman</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <!-- Cicilan -->
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="mb-1">Cicilan</h2>
+                <p class="mb-0">Perhitungan simulasi cicilan pinjaman Anda</p>
+            </div>
+            <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between">
+                    <p class="text-black">Jumlah Pinjaman</p>
+                    <p class="text-black" id="cicilanJumlah">Rp. 0</p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <p class="text-black">Tenor</p>
+                    <p class="text-black" id="cicilanTenor">0 bulan</p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <p class="text-black">Bunga</p>
+                    <p class="text-black" id="cicilanBunga">{{ $bunga->bunga }} % per bukan</p>
+                </div>
+                <hr class="m-0 mb-3" />
+                <div class="d-flex align-items-center justify-content-between">
+                    <p class="text-black">Total Bunga</p>
+                    <p class="text-black" id="totalBunga">Rp. 0</p>
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <p class="text-black">Total Pembayaran</p>
+                    <p class="text-black" id="totalPembayaran">Rp. 0</p>
+                </div>
+                <hr class="m-0 mb-3" />
+                <div class="d-flex align-items-center justify-content-between">
+                    <p class="text-black">Cicilan Per Bulan</p>
+                    <p class="fw-bold text-black" id="cicilanPerBulan">Rp. 0</p>
+                </div>
+                <div class="alert alert-secondary mt-4" role="alert">
+                    <h6 class="alert-heading fw-bold mb-2">Catatan Penting:</h6>
+                    <ul class="mb-0 ps-3">
+                        <li>Pengajuan akan diproses dalam 3–5 hari kerja</li>
+                        <li>Pastikan data yang diisi sudah benar</li>
+                        <li>Jika sudah megirim data pinjaman silahkan ke halaman data pinjaman untuk menunggu persetujuan
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Elemen input
+            const jumlahPinjamanInput = document.getElementById("jumlahPinjaman");
+            const tenorPinjamanSelect = document.getElementById("tenorPinjaman");
+
+            // Elemen output
+            const cicilanJumlah = document.getElementById("cicilanJumlah");
+            const cicilanTenor = document.getElementById("cicilanTenor");
+            const totalBunga = document.getElementById("totalBunga");
+            const totalPembayaran = document.getElementById("totalPembayaran");
+            const cicilanPerBulan = document.getElementById("cicilanPerBulan");
+
+            // Nilai bunga per bulan dari backend (contoh: 2%)
+            const bungaPerBulan = {{ $bunga->bunga }};
+
+            // Fungsi format rupiah
+            function formatRupiah(angka) {
+                return new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0
+                }).format(angka);
+            }
+
+            // Fungsi perhitungan cicilan
+            function hitungCicilan() {
+                const jumlah = parseFloat(jumlahPinjamanInput.value) || 0;
+                const tenor = parseInt(tenorPinjamanSelect.value) || 0;
+
+                const bungaTotal = jumlah * (bungaPerBulan / 100) * tenor;
+                const totalBayar = jumlah + bungaTotal;
+                const cicilanBulanan = tenor > 0 ? totalBayar / tenor : 0;
+
+                // Update tampilan
+                cicilanJumlah.textContent = formatRupiah(jumlah);
+                cicilanTenor.textContent = tenor + " bulan";
+                totalBunga.textContent = formatRupiah(bungaTotal);
+                totalPembayaran.textContent = formatRupiah(totalBayar);
+                cicilanPerBulan.textContent = formatRupiah(cicilanBulanan);
+            }
+
+            jumlahPinjamanInput.addEventListener("input", hitungCicilan);
+            tenorPinjamanSelect.addEventListener("change", hitungCicilan);
+        });
+    </script>
     @include('sweetalert::alert')
 @endsection

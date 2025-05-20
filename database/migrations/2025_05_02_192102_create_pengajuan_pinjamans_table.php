@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->bigInteger('jumlah_pinjaman');
             $table->bigInteger('tenor');
-            $table->bigInteger('bunga')->nullable();
+            $table->unsignedBigInteger('id_bunga')->nullable();
             $table->bigInteger('jumlah_kotor')->nullable();
             $table->bigInteger('angsuran_per_bulanan')->nullable();
             $table->date('jatuh_tempo');
@@ -24,6 +24,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_bunga')->references('id_bunga')->on('bungas')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

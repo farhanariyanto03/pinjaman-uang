@@ -83,7 +83,7 @@
                                             <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Cicilan per Bulan</strong><br>
                                                 <span class="text-muted">Rp.
-                                                    {{ number_format($status_menunggu->angsuran_per_bulan, 0, ',', '.') }}</span>
+                                                    {{ number_format($status_menunggu->angsuran_per_bulanan, 0, ',', '.') }}</span>
                                             </div>
                                             {{-- <div class="col-md-6 mb-2">
                                                 <strong class="text-black">Sisa Cicilan</strong><br>

@@ -8,7 +8,16 @@ class PengajuanPinjaman extends Model
 {
     protected $table = 'pengajuan_pinjamans';
     protected $primaryKey = 'id_pengajuan_pinjaman';
-    protected $fillable = ['id_user', 'jumlah_pinjaman', 'tenor', 'bunga',  'jatuh_tempo', 'status'];
+    protected $fillable = [
+        'id_user',
+        'jumlah_pinjaman',
+        'tenor',
+        'id_bunga',
+        'jumlah_kotor',
+        'angsuran_per_bulanan',
+        'jatuh_tempo',
+        'status',
+    ];
 
     public function detailPinjaman()
     {

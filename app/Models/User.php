@@ -26,6 +26,12 @@ class User extends Authenticatable
         'role',
     ];
 
+    public function pengajuan()
+    {
+        // satu user bisa punya banyak pengajuan pinjaman
+        return $this->hasMany(PengajuanPinjaman::class, 'id_user', 'id');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

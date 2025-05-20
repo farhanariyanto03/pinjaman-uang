@@ -20,29 +20,10 @@ class PengajuanAdminController extends Controller
         ]);
     }
 
-    public function updateStatusDiterima(Request $request, $id)
+    public function updateStatusDiterima($id)
     {
         $pengajuan = PengajuanPinjaman::find($id);
-
-        $validatedData = $request->validate([
-            'bunga' => 'required|numeric',
-        ], [
-            'bunga.required' => 'Bunga harus diisi',
-            'bunga.numeric' => 'Bunga harus berupa angka',
-        ]);
-
-        // Hitung total bunga
-        $total_bunga = ($pengajuan->jumlah_pinjaman * $validatedData['bunga'] / 100) * $pengajuan->tenor;
-
-        // Hitung jumlah kotor
-        $pengajuan->jumlah_kotor = $pengajuan->jumlah_pinjaman + $total_bunga;
-
-        // Hitung angsuran per bulan
-        $pengajuan->angsuran_per_bulanan = $pengajuan->jumlah_kotor / $pengajuan->tenor;
-
         $pengajuan->status = 'diterima';
-        $pengajuan->bunga = $validatedData['bunga'];
-        $pengajuan->updated_at = now();
         $pengajuan->save();
 
         Alert::success('Berhasil', 'Pengajuan diterima')->autoClose(3000);
