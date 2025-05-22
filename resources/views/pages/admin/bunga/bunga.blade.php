@@ -21,7 +21,7 @@
                                     </td>
                                     <td><span class="badge bg-label-primary me-1">{{ $b->bunga }} %</span></td>
                                     <td>
-                                        <a href="#" class="btn btn-icon btn-outline-warning">
+                                        <a href="{{ route('admin.bunga', $b->id_bunga) }}" class="btn btn-icon btn-outline-warning">
                                             <i class='bx bxs-pencil'></i>
                                         </a>
                                     </td>

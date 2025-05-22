@@ -49,8 +49,8 @@
 
 <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
+    <div class="layout-wrapper layout-content-navbar">
             <!-- Menu -->
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -195,8 +195,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">John Doe</span>
-                                                    <small class="text-muted">Admin</small>
+                                                    <span class="fw-semibold d-block">{{ Auth::user()->nama }}</span>
+                                                    <small class="text-muted">{{ Auth::user()->role }}</small>
                                                 </div>
                                             </div>
                                         </a>

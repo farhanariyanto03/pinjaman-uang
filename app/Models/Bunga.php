@@ -8,4 +8,8 @@ class Bunga extends Model
 {
     protected $table = 'bungas';
     protected $primaryKey = 'id_bunga';
+
+    protected $fillable = [
+        'bunga',
+    ];
 }
