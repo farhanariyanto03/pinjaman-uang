@@ -54,22 +54,33 @@
                                 <span class="app-brand-text demo text-body fw-bolder">PINKAR</span>
                             </a>
                         </div>
-
+                        
                         @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $item)
-                                        <li>{{ $item }}</li>
-                                    @endforeach
-                                </ul>
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
                             </div>
                         @endif
-                        <form id="formAuthentication" action="{{ route('cekLogin') }}" class="mb-3" action="" method="POST">
+
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+
+                        <form id="formAuthentication" action="{{ route('cekLogin') }}" class="mb-3" action=""
+                            method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email </label>
                                 <input type="text" value="{{ old('email') }}" class="form-control" id="email"
-                                    name="email" placeholder="Masukkan email anda" value="{{ old('email') }}" autofocus />
+                                    name="email" placeholder="Masukkan email anda" value="{{ old('email') }}"
+                                    autofocus />
                             </div>
                             <div class="mb-3 form-password-toggle">
                                 <div class="d-flex justify-content-between">

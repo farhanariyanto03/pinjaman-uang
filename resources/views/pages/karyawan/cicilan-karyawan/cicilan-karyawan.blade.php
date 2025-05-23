@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="nav-align-top mb-4">
-                <ul class="nav nav-pills mb-3" role="tablist">
+                {{-- <ul class="nav nav-pills mb-3" role="tablist">
                     <li class="nav-item">
                         <button type="button" class="nav-link active" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-top-home" aria-controls="navs-pills-top-home" aria-selected="true">
@@ -19,7 +19,7 @@
                             Ditolak
                         </button>
                     </li>
-                </ul>
+                </ul> --}}
                 <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
                     @foreach ($cicilanBelumLunas as $c)
                         <div class="col-md-12 mb-4">
@@ -87,9 +87,9 @@
                     @endif
                 </div>
 
-                <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
-                    <p>testt</p>
-                </div>
+                {{-- <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
+                    <>testt</
+                </div> --}}
             </div>
         </div>
     </div>

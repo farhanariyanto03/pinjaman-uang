@@ -43,14 +43,19 @@ class CicilanKaryawanController extends Controller
             return $item->status === 'diterima' && $item->sisa_cicilan > 0;
         });
 
+        // $ditolak = $data->filter(function ($item) {
+        //     return $item->status === 'ditolak';
+        // });
+
         // $lunas = $data->where('status', 'lunas');
         $ditolak = $data->where('status', 'ditolak');
 
         return view('pages.karyawan.cicilan-karyawan.cicilan-karyawan', [
             'title' => 'Cicilan Karyawan',
             'cicilanBelumLunas' => $diterima,
+            // 'cicilanDitolak' => $ditolak,
             // 'cicilanLunas' => $lunas,
-            'cicilanDitolak' => $ditolak
+            // 'cicilanDitolak' => $ditolak
         ]);
     }
 

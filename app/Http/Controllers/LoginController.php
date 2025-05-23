@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -58,17 +59,6 @@ class LoginController extends Controller
             'foto_user' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'foto_kk' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ], [
-            'nama.required' => 'Nama harus diisi.',
-            'email.required' => 'Email harus diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'email.unique' => 'Email sudah terdaftar.',
-            'password.required' => 'Password harus diisi.',
-            'alamat.required' => 'Alamat harus diisi.',
-            'no_hp.required' => 'Nomor HP harus diisi.',
-            'foto_user.required' => 'Foto User harus diisi.',
-            'foto_kk.required' => 'Foto Kartu Keluarga harus diisi.',
-            'foto_ktp.required' => 'Foto Kartu Tanda Penduduk harus diisi.',
         ]);
 
         $user = User::create([
@@ -82,19 +72,23 @@ class LoginController extends Controller
 
         $path = 'uploads/';
 
-        $fotoUser = $validatedData['foto_user'];
-        $fotoUser->storeAs($path . 'foto_user', $fotoUser->getClientOriginalName());
-        $fotoKK = $validatedData['foto_kk'];
-        $fotoKK->storeAs($path . 'foto_kk', $fotoKK->getClientOriginalName());
-        $fotoKTP = $validatedData['foto_ktp'];
-        $fotoKTP->storeAs($path . 'foto_ktp', $fotoKTP->getClientOriginalName());
+        $fotoUser = $request->file('foto_user');
+        $fotoKK = $request->file('foto_kk');
+        $fotoKTP = $request->file('foto_ktp');
+
+        $fotoUser->move(public_path($path . 'foto_user'), $fotoUser->getClientOriginalName());
+        $fotoKK->move(public_path($path . 'foto_kk'), $fotoKK->getClientOriginalName());
+        $fotoKTP->move(public_path($path . 'foto_ktp'), $fotoKTP->getClientOriginalName());
 
         InformasiPribadi::create([
-            'user_id' => $user->id,
+            'id_user' => $user->id,
             'foto_user' => $path . 'foto_user/' . $fotoUser->getClientOriginalName(),
             'foto_kk' => $path . 'foto_kk/' . $fotoKK->getClientOriginalName(),
             'foto_ktp' => $path . 'foto_ktp/' . $fotoKTP->getClientOriginalName(),
         ]);
+
+        Alert::success('Berhasil', 'Registrasi Berhasil');
+        return redirect()->route('login');
     }
 
     public function logout()

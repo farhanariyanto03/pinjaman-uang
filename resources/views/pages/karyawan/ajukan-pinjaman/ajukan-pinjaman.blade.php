@@ -84,7 +84,7 @@
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
                     <p class="text-black">Bunga</p>
-                    <p class="text-black" id="cicilanBunga">{{ $bunga->bunga }} % per bukan</p>
+                    <p class="text-black" id="cicilanBunga">{{ $bunga->bunga }} % per bulan</p>
                 </div>
                 <hr class="m-0 mb-3" />
                 <div class="d-flex align-items-center justify-content-between">

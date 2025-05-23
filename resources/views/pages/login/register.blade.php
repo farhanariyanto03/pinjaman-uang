@@ -60,7 +60,7 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('cekLogin') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('storeRegister') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="text-center mb-4">

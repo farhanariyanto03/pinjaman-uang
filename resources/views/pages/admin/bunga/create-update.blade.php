@@ -5,7 +5,7 @@
         <div class="col-xl-6">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h3 class="mb-3">{{ $bunga ? 'Edit bunga' : 'Tambah bunga' }}</h3>
+                    <h3 class="mb-3">Edit Bunga</h3>
 
                     @if ($errors->any())
                         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -18,12 +18,9 @@
                         </div>
                     @endif
 
-                    <form action="{{ $bunga ? route('admin.bunga.update', $bunga->id_bunga) : route('bunga.store') }}"
-                        method="POST">
+                    <form action="{{ route('admin.bunga.update', $bunga->id_bunga) }}"method="POST">
                         @csrf
-                        @if ($bunga)
-                            @method('PUT')
-                        @endif
+                        @method('PUT')
 
                         <div class="mb-3">
                             <label class="form-label">Bunga</label>
@@ -31,7 +28,7 @@
                                 value="{{ old('bunga', $bunga->bunga ?? '') }}" />
                         </div>
 
-                        <button type="submit" class="btn btn-primary">{{ $bunga ? 'Update' : 'Tambah' }}</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         <a href="{{ route('admin.bunga') }}" class="btn btn-danger">Kembali</a>
                     </form>
                 </div>

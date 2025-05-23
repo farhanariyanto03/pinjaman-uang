@@ -79,7 +79,7 @@
                         <input type="number" class="form-control" name="jumlah_uang" id="jumlahUang"
                             placeholder="Masukkan jumlah" value="{{ $cicilan->angsuran_per_bulanan }}" readonly />
                     </div>
-                    <button class="btn btn-primary mt-3 w-100" type="submit">Ajukan Pinjaman</button>
+                    <button class="btn btn-primary mt-3 w-100" type="submit">Bayar Cicilan</button>
                 </div>
             </form>
         </div>

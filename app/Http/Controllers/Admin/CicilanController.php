@@ -15,10 +15,20 @@ class CicilanController extends Controller
             ->where('status', 'menunggu')
             ->get();
 
+        $pembayaranDiterima = PembayaranPinjaman::with('pengajuan.user')
+            ->where('status', 'diterima')
+            ->get();
+
+        $pembayaranDitolak = PembayaranPinjaman::with('pengajuan.user')
+            ->where('status', 'ditolak')
+            ->get();
+
 
         return view('pages.admin.cicilan.cicilan', [
             'title' => 'Cicilan',
-            'pembayaran' => $pembayaran
+            'pembayaranMenunggu' => $pembayaran,
+            'pembayaranDiterima' => $pembayaranDiterima,
+            'pembayaranDitolak' => $pembayaranDitolak
         ]);
     }
 
@@ -28,7 +38,25 @@ class CicilanController extends Controller
         $pembayaran->status = 'diterima';
         $pembayaran->save();
 
+        // Hitung total pembayaran yang diterima
+        $jumlahPembayaranDiterima = $pembayaran->where('status', 'diterima')->count();
+
+        // Jika semua pembayaran telah diterima ubah status pengajuan menjadi 'diterima'
+        if ($jumlahPembayaranDiterima === $pembayaran->pengajuan->tenor) {
+            $pembayaran->pengajuan->status = 'Lunas';
+            $pembayaran->pengajuan->save();
+        }
+
         Alert::success('Berhasil', 'Pembayaran diterima')->autoClose(3000);
+        return redirect()->route('admin.cicilan');
+    }
+
+    public function ditolak($id)
+    {
+        $pembayaran = PembayaranPinjaman::find($id);
+        $pembayaran->status = 'ditolak';
+        $pembayaran->save();
+        Alert::error('Berhasil', 'Pembayaran ditolak')->autoClose(3000);
         return redirect()->route('admin.cicilan');
     }
 }

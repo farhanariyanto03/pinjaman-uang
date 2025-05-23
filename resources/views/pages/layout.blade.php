@@ -49,8 +49,8 @@
 
 <body>
     <!-- Layout wrapper -->
-        <div class="layout-container">
-    <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+        <div class="layout-wrapper layout-content-navbar">
             <!-- Menu -->
 
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
@@ -181,7 +181,8 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('admin/img/avatars/1.png') }}" alt class="w-px-30 h-auto rounded-circle" />
+                                        <img src="{{ asset('admin/img/avatars/1.png') }}" alt
+                                            class="w-px-30 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -204,15 +205,14 @@
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bx bx-user me-2"></i>
-                                            <span class="align-middle">My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="dropdown-divider"></div>
-                                    </li>
+                                    @if (Auth::user()->role == 'karyawan')
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('karyawan.profile') }}">
+                                                <i class="bx bx-user me-2"></i>
+                                                <span class="align-middle">Profile</span>
+                                            </a>
+                                        </li>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}">
                                         <li>
                                             <i class="bx bx-power-off me-2"></i>
