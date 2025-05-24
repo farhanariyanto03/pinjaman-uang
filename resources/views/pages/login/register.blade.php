@@ -44,17 +44,20 @@
             <div class="authentication-inner">
                 <div class="card shadow-sm mx-auto">
                     <div class="card-body">
-                        @if (Session::has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>{{ Session::get('success') }}</strong>
+                        
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                @foreach ($errors->all() as $item)
+                                    <li>{{ $item }}</li>
+                                @endforeach
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
                         @endif
 
-                        @if (Session::has('error'))
-                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>{{ Session::get('error') }}</strong>
+                        @if (session('error'))
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                {{ session('error') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
@@ -85,56 +88,39 @@
                                 <input type="text" class="form-control" name="no_hp"
                                     placeholder="Masukkan nomor HP" />
                             </div>
+                            <!-- Foto Pribadi -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Foto Pribadi</label>
+                                <input type="file" class="form-control" name="foto_user"
+                                    onchange="previewImage(event, 'preview-foto-user')" />
+                            </div>
 
-                            <!-- Upload Foto -->
-                            <div class="row">
-                                <!-- Foto Pribadi -->
-                                <div class="col-md-4 text-center mb-3">
-                                    <label class="form-label fw-bold">Foto Pribadi</label>
-                                    <div class="mb-2 d-flex justify-content-center">
-                                        <img id="preview-foto-user" src="https://via.placeholder.com/150"
-                                            class="img-thumbnail" style="height: 150px;" alt="Foto Pribadi" />
-                                    </div>
-                                    <input type="file" class="form-control" name="foto_user"
-                                        onchange="previewImage(event, 'preview-foto-user')" />
-                                </div>
+                            <!-- Foto KTP -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Foto KTP</label>
+                                <input type="file" class="form-control" name="foto_ktp"
+                                    onchange="previewImage(event, 'preview-foto-ktp')" />
+                            </div>
 
-                                <!-- Foto KTP -->
-                                <div class="col-md-4 text-center mb-3">
-                                    <label class="form-label fw-bold">Foto KTP</label>
-                                    <div class="mb-2 d-flex justify-content-center">
-                                        <img id="preview-foto-ktp" src="https://via.placeholder.com/150"
-                                            class="img-thumbnail" style="height: 150px;" alt="Foto KTP" />
-                                    </div>
-                                    <input type="file" class="form-control" name="foto_ktp"
-                                        onchange="previewImage(event, 'preview-foto-ktp')" />
-                                </div>
+                            <!-- Foto KK -->
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Foto KK</label>
+                                <input type="file" class="form-control" name="foto_kk"
+                                    onchange="previewImage(event, 'preview-foto-kk')" />
+                            </div>
 
-                                <!-- Foto KK -->
-                                <div class="col-md-4 text-center mb-3">
-                                    <label class="form-label fw-bold">Foto KK</label>
-                                    <div class="mb-2 d-flex justify-content-center">
-                                        <img id="preview-foto-kk" src="https://via.placeholder.com/150"
-                                            class="img-thumbnail" style="height: 150px;" alt="Foto KK" />
-                                    </div>
-                                    <input type="file" class="form-control" name="foto_kk"
-                                        onchange="previewImage(event, 'preview-foto-kk')" />
-                                </div>
-
-                                <!-- Login -->
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="text" class="form-control" id="" name="email"
-                                        placeholder="Masukkan email anda" value="{{ old('email') }}" autofocus />
-                                </div>
-                                <div class="mb-3 form-password-toggle">
-                                    <label for="password" class="form-label">Password</label>
-                                    <div class="input-group input-group-merge">
-                                        <input type="password" id="password" name="password" class="form-control"
-                                            placeholder="************" />
-                                        <span class="input-group-text cursor-pointer"><i
-                                                class="bx bx-hide"></i></span>
-                                    </div>
+                            <!-- Login -->
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="" name="email"
+                                    placeholder="Masukkan email anda" value="{{ old('email') }}" autofocus />
+                            </div>
+                            <div class="mb-3 form-password-toggle">
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        placeholder="************" />
+                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                             </div>
 
@@ -152,7 +138,7 @@
     </div>
 
     <!-- JavaScript untuk preview gambar -->
-    <script>
+    {{-- <script>
         function previewImage(event, previewId) {
             const reader = new FileReader();
             reader.onload = function() {
@@ -161,7 +147,7 @@
             };
             reader.readAsDataURL(event.target.files[0]);
         }
-    </script>
+    </script> --}}
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

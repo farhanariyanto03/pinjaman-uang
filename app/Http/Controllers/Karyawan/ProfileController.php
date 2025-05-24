@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Karyawan;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
@@ -13,6 +16,7 @@ class ProfileController extends Controller
         $informasi_pribadi = $user->informasiPribadi;
 
         return view('pages.karyawan.profile.profile', [
+            'title' => 'Profile',
             'user' => $user,
             'informasi_pribadi' => $informasi_pribadi
         ]);
@@ -22,61 +26,60 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        // Validasi input (sesuaikan kebutuhan)
-        $request->validate([
-            'firstName' => 'required|string|max:255',
-            'lastName' => 'nullable|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:6|confirmed', // kalau pakai konfirmasi password
+        $validatedData = $request->validate([
+            'nama' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id, // perbolehkan email user sendiri
+            'password' => 'nullable|min:6',
+            'alamat' => 'required',
+            'no_hp' => 'required',
             'foto_user' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'foto_kk' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'foto_ktp' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Update data dasar user
-        $user->nama = $request->firstName;
-        $user->alamat = $request->lastName;
-        $user->email = $request->email;
-        $user->no_hp = $request->input('no_hp'); // jika ada input no_hp di form, jangan lupa tambahkan di form juga ya
-
-        // Update password jika ada input password
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
+        // Update data user
+        $user->nama = $validatedData['nama'];
+        $user->email = $validatedData['email'];
+        if (!empty($validatedData['password'])) {
+            $user->password = Hash::make($validatedData['password']);
         }
-
-        // Simpan perubahan user
+        $user->alamat = $validatedData['alamat'];
+        $user->no_hp = $validatedData['no_hp'];
         $user->save();
 
-        // Update foto - simpan ke folder 'public/foto_users' atau folder lain sesuai kebutuhan
+        // Update data informasi pribadi
         $informasi = $user->informasiPribadi;
+        if (!$informasi) {
+            $informasi = new \App\Models\InformasiPribadi();
+            $informasi->id_user = $user->id;
+        }
+
+        $path = 'uploads/';
 
         if ($request->hasFile('foto_user')) {
-            // Hapus foto lama jika ada
-            if ($informasi->foto_user && Storage::exists($informasi->foto_user)) {
-                Storage::delete($informasi->foto_user);
-            }
-            $path = $request->file('foto_user')->store('public/foto_users');
-            $informasi->foto_user = Storage::url($path);
+            $fotoUser = $request->file('foto_user');
+            $fotoUserName = time() . '_' . $fotoUser->getClientOriginalName();
+            $fotoUser->move(public_path($path . 'foto_user'), $fotoUserName);
+            $informasi->foto_user = $path . 'foto_user/' . $fotoUserName;
         }
 
         if ($request->hasFile('foto_kk')) {
-            if ($informasi->foto_kk && Storage::exists($informasi->foto_kk)) {
-                Storage::delete($informasi->foto_kk);
-            }
-            $path = $request->file('foto_kk')->store('public/foto_kk');
-            $informasi->foto_kk = Storage::url($path);
+            $fotoKK = $request->file('foto_kk');
+            $fotoKKName = time() . '_' . $fotoKK->getClientOriginalName();
+            $fotoKK->move(public_path($path . 'foto_kk'), $fotoKKName);
+            $informasi->foto_kk = $path . 'foto_kk/' . $fotoKKName;
         }
 
         if ($request->hasFile('foto_ktp')) {
-            if ($informasi->foto_ktp && Storage::exists($informasi->foto_ktp)) {
-                Storage::delete($informasi->foto_ktp);
-            }
-            $path = $request->file('foto_ktp')->store('public/foto_ktp');
-            $informasi->foto_ktp = Storage::url($path);
+            $fotoKTP = $request->file('foto_ktp');
+            $fotoKTPName = time() . '_' . $fotoKTP->getClientOriginalName();
+            $fotoKTP->move(public_path($path . 'foto_ktp'), $fotoKTPName);
+            $informasi->foto_ktp = $path . 'foto_ktp/' . $fotoKTPName;
         }
 
         $informasi->save();
 
-        return redirect()->back()->with('success', 'Profil berhasil diperbarui');
+        Alert::success('Berhasil', 'Data berhasil diperbarui');
+        return redirect()->back();
     }
 }

@@ -12,6 +12,7 @@ class DashboardAdminController extends Controller
     public function index()
     {
         return view('pages.admin.dashboard.dashboard', [
+            'title' => 'Dashboard',
             'pengajuan' => PengajuanPinjaman::where('status', 'menunggu')->count(),
             'lunas' => PengajuanPinjaman::where('status', 'lunas')->count(),
             'karyawan' => User::where('role', 'karyawan')->count(),

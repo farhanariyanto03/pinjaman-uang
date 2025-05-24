@@ -3,7 +3,9 @@
 @section('content')
     <div class="col-md-12">
         <div class="card mb-4">
-            <form id="formAccountSettings" method="POST" onsubmit="return false">
+            <form id="formAccountSettings" action="{{ route('karyawan.profile.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <h5 class="card-header">Profile</h5>
                 <!-- Account -->
                 <div class="card-body">
@@ -14,7 +16,7 @@
                             <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload foto user</span>
                                 <i class="bx bx-upload d-block d-sm-none"></i>
-                                <input type="file" id="upload" class="account-file-input" hidden
+                                <input type="file" name="foto_user" id="upload" class="account-file-input" hidden
                                     accept="image/png, image/jpeg" />
                             </label>
 
@@ -27,22 +29,22 @@
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">NamaLengkap</label>
-                            <input class="form-control" type="text" id="firstName" name="firstName"
+                            <input class="form-control" type="text" id="firstName" name="nama"
                                 value="{{ Auth::user()->nama }}" autofocus />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="lastName" class="form-label">Alamat</label>
-                            <input class="form-control" type="text" name="lastName" id="lastName"
+                            <input class="form-control" type="text" name="alamat" id="lastName"
                                 value="{{ Auth::user()->alamat }}" />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="lastName" class="form-label">No HP</label>
-                            <input class="form-control" type="text" name="lastName" id="lastName"
+                            <input class="form-control" type="text" name="no_hp" id="lastName"
                                 value="{{ Auth::user()->no_hp }}" />
                         </div>
                         <div class="mb-3 col-md-6">
                             <label for="lastName" class="form-label">Role</label>
-                            <input class="form-control" type="text" name="lastName" id="lastName"
+                            <input class="form-control" type="text" name="role" id="lastName"
                                 value="{{ Auth::user()->role }}" disabled />
                         </div>
                         <div class="mb-3 col-md-6">
@@ -118,4 +120,6 @@
             previewFile(e.target, 'previewFotoKTP');
         });
     </script>
+
+    @include('sweetalert::alert')
 @endsection

@@ -34,17 +34,22 @@ class CicilanController extends Controller
 
     public function diterima($id)
     {
-        $pembayaran = PembayaranPinjaman::find($id);
+        $pembayaran = PembayaranPinjaman::findOrFail($id);
         $pembayaran->status = 'diterima';
         $pembayaran->save();
 
-        // Hitung total pembayaran yang diterima
-        $jumlahPembayaranDiterima = $pembayaran->where('status', 'diterima')->count();
+        // Ambil pengajuan terkait
+        $pengajuan = $pembayaran->pengajuan;
 
-        // Jika semua pembayaran telah diterima ubah status pengajuan menjadi 'diterima'
-        if ($jumlahPembayaranDiterima === $pembayaran->pengajuan->tenor) {
-            $pembayaran->pengajuan->status = 'Lunas';
-            $pembayaran->pengajuan->save();
+        // Hitung jumlah pembayaran diterima untuk pengajuan ini
+        $jumlahPembayaranDiterima = PembayaranPinjaman::where('id_pengajuan_pinjaman', $pengajuan->id_pengajuan_pinjaman)
+            ->where('status', 'diterima')
+            ->count();
+
+        // Cek apakah jumlah pembayaran diterima sama dengan tenor
+        if ($jumlahPembayaranDiterima >= $pengajuan->tenor) {
+            $pengajuan->status = 'lunas';
+            $pengajuan->save();
         }
 
         Alert::success('Berhasil', 'Pembayaran diterima')->autoClose(3000);

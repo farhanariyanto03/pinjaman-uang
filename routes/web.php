@@ -51,4 +51,5 @@ Route::prefix('karyawan')->middleware(['auth', 'role:karyawan'])->group(function
     Route::get('/pembatalan', [PembatalanPinjamanController::class, 'index'])->name('karyawan.pembatalan-pengajuan');
     Route::delete('/pembatalan/{id_pengajuan_pinjaman}', [PembatalanPinjamanController::class, 'batalPengajuan'])->name('karyawan.pembatalan-pengajuan.batal');
     Route::get('/profile', [ProfileController::class, 'index'])->name('karyawan.profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('karyawan.profile.update');
 });

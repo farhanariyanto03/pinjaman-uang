@@ -7,7 +7,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>PINKAR</title>
+    <title>PINKAR | {{ $title }}</title>
 
     <meta name="description" content="" />
 
@@ -80,7 +80,7 @@
 
                         <li class="menu-item {{ Request::is('adminn/bunga-pinjaman') ? 'active' : '' }}">
                             <a href="{{ route('admin.bunga') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <i class="menu-icon tf-icons bx bx-euro"></i>
                                 <div data-i18n="Analytics">Bunga</div>
                             </a>
                         </li>
@@ -88,21 +88,21 @@
                         <!-- Pengajuan Admin -->
                         <li class="menu-item {{ Request::is('adminn/pengajuan') ? 'active' : '' }}">
                             <a href="{{ route('admin.pengajuan') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <i class="menu-icon tf-icons bx bx-clipboard"></i>
                                 <div data-i18n="Analytics">Pengajuan</div>
                             </a>
                         </li>
 
                         <li class="menu-item {{ Request::is('adminn/bank') ? 'active' : '' }}">
                             <a href="{{ route('bank.index') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <i class="menu-icon tf-icons bx bxs-bank"></i>
                                 <div data-i18n="Analytics">Bank</div>
                             </a>
                         </li>
 
                         <li class="menu-item {{ Request::is('adminn/cicilan') ? 'active' : '' }}">
                             <a href="{{ route('admin.cicilan') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <i class="menu-icon tf-icons bx bx-wallet"></i>
                                 <div data-i18n="Analytics">Pembayaran</div>
                             </a>
                         </li>
@@ -119,7 +119,7 @@
                         <li
                             class="menu-item {{ Request::is('karyawan/ajukan-pinjaman') || Request::is('karyawan/data-pinjaman') || Request::is('karyawan/data-pinjaman') ? 'active open' : '' }}">
                             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                                <i class="menu-icon tf-icons bx bx-game"></i>
+                                <i class='menu-icon bx  bx-euro'  ></i>
                                 <div data-i18n="Layouts">Pinjaman</div>
                             </a>
                             <ul class="menu-sub">
@@ -140,7 +140,7 @@
                         <!-- Pembayaran -->
                         <li class="menu-item {{ Request::is('karyawan/cicilan') ? 'active' : '' }}">
                             <a href="{{ route('karyawan.cicilan-karyawan') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <i class='menu-icon bx  bx-wallet-alt'  ></i>
                                 <div data-i18n="Analytics">Cicilan Pinjaman</div>
                             </a>
                         </li>
@@ -148,7 +148,7 @@
                         <!-- Pembatalan -->
                         <li class="menu-item {{ Request::is('karyawan/pembatalan') ? 'active' : '' }}">
                             <a href="{{ route('karyawan.pembatalan-pengajuan') }}" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <i class="menu-icon tf-icons bx bx-x"></i>
                                 <div data-i18n="Analytics">Pembatalan Pinajaman</div>
                             </a>
                         </li>
@@ -171,7 +171,7 @@
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Judul -->
                         <div class="navbar-nav align-items-center">
-                            Pinkar | Dashboard
+                            Pinkar | {{ $title }}
                         </div>
                         <!-- /Judul -->
 

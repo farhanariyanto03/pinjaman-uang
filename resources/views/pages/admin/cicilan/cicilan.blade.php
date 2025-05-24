@@ -33,6 +33,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Karyawan</th>
+                                    <th>No HP</th>
                                     <th>Bayar</th>
                                     <th>Tanggal Bayar</th>
                                     <th>Metode Pembayaran</th>
@@ -48,6 +49,7 @@
                                             <strong>{{ $loop->iteration }}</strong>
                                         </td>
                                         <td>{{ $p->pengajuan->user->nama }}</td>
+                                        <td>{{ $p->pengajuan->user->no_hp }}</td>
                                         <td>Rp. {{ number_format($p->jumlah_pembayaran, 0, ',', '.') }}</td>
                                         <td>{{ $p->tanggal_pembayaran }}</td>
                                         <td><span class="badge bg-label-primary me-1">{{ $p->metode_pembayaran }}</span>
@@ -84,6 +86,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Karyawan</th>
+                                    <th>No HP</th>
                                     <th>Bayar</th>
                                     <th>Tanggal Bayar</th>
                                     <th>Metode Pembayaran</th>
@@ -98,6 +101,7 @@
                                             <strong>{{ $loop->iteration }}</strong>
                                         </td>
                                         <td>{{ $p->pengajuan->user->nama }}</td>
+                                        <td>{{ $p->pengajuan->user->no_hp }}</td>
                                         <td>Rp. {{ number_format($p->jumlah_pembayaran, 0, ',', '.') }}</td>
                                         <td>{{ $p->tanggal_pembayaran }}</td>
                                         <td><span class="badge bg-label-primary me-1">{{ $p->metode_pembayaran }}</span>
@@ -116,6 +120,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Karyawan</th>
+                                    <th>No HP</th>
                                     <th>Bayar</th>
                                     <th>Tanggal Bayar</th>
                                     <th>Metode Pembayaran</th>
@@ -130,6 +135,7 @@
                                             <strong>{{ $loop->iteration }}</strong>
                                         </td>
                                         <td>{{ $p->pengajuan->user->nama }}</td>
+                                        <td>{{ $p->pengajuan->user->no_hp }}</td>
                                         <td>Rp. {{ number_format($p->jumlah_pembayaran, 0, ',', '.') }}</td>
                                         <td>{{ $p->tanggal_pembayaran }}</td>
                                         <td><span class="badge bg-label-primary me-1">{{ $p->metode_pembayaran }}</span>
