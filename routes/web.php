@@ -15,9 +15,9 @@ use App\Http\Controllers\Karyawan\CicilanKaryawanController;
 use App\Http\Controllers\Karyawan\PembatalanPinjamanController;
 use App\Http\Controllers\Admin\BungaController as AdminBungaController;
 
-// Route::get('/', function () {
-//     return view('layout');
-// });
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/cekLogin', [LoginController::class, 'login'])->name('cekLogin');

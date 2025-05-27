@@ -3,15 +3,16 @@
 @section('content')
     <div class="col-md-12">
         <div class="card mb-4">
-            <form id="formAccountSettings" action="{{ route('karyawan.profile.update') }}" method="POST" enctype="multipart/form-data">
+            <form id="formAccountSettings" action="{{ route('karyawan.profile.update') }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <h5 class="card-header">Profile</h5>
                 <!-- Account -->
                 <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="{{ asset(Auth::user()->informasiPribadi->foto_user) }}" alt="user-avatar"
-                            class="d-block rounded" height="150" width="150" id="previewFotoUser" />
+                        <img src="{{ asset(Auth::user()->informasiPribadi->foto_user ?? 'admin/img/avatars/1.png') }}"
+                            alt="user-avatar" class="d-block rounded" height="150" width="150" id="previewFotoUser" />
                         <div class="button-wrapper">
                             <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload foto user</span>
@@ -62,26 +63,17 @@
 
                         <div class="mb-3 col-md-4">
                             <label class="form-label">Foto KK</label><br>
-                            @if (Auth::user()->informasiPribadi->foto_kk)
-                                <img id="previewFotoKK" src="{{ asset(Auth::user()->informasiPribadi->foto_kk) }}"
-                                    alt="Foto KK" style="width:150px; height:150px; border-radius:5px;">
-                            @else
-                                <img id="previewFotoKK" src="#" alt="Foto KK"
-                                    style="width:150px; height:150px; border-radius:5px; display:none;">
-                            @endif
+                            <img id="previewFotoKK" src="{{ asset(Auth::user()->informasiPribadi->foto_kk ?: 'admin/img/elements/12.jpg') }}"
+                                alt="Foto KK" style="width:150px; height:150px; border-radius:5px;">
                             <input type="file" id="fotoKKInput" name="foto_kk" class="form-control mt-2"
                                 accept="image/*" />
                         </div>
 
                         <div class="mb-3 col-md-4">
                             <label class="form-label">Foto KTP</label><br>
-                            @if (Auth::user()->informasiPribadi->foto_ktp)
-                                <img id="previewFotoKTP" src="{{ asset(Auth::user()->informasiPribadi->foto_ktp) }}"
-                                    alt="Foto KTP" style="width:150px; height:150px; border-radius:5px;">
-                            @else
-                                <img id="previewFotoKTP" src="#" alt="Foto KTP"
-                                    style="width:150px; height:150px; border-radius:5px; display:none;">
-                            @endif
+                            <img id="previewFotoKTP"
+                                src="{{ asset(Auth::user()->informasiPribadi->foto_ktp ?: 'admin/img/elements/13.jpg') }}"
+                                alt="Foto KTP" style="width:150px; height:150px; border-radius:5px;">
                             <input type="file" id="fotoKTPInput" name="foto_ktp" class="form-control mt-2"
                                 accept="image/*" />
                         </div>
