@@ -8,7 +8,7 @@ class InformasiPribadi extends Model
 {
     protected $table = 'informasi_pribadis';
     protected $primaryKey = 'id_informasi_pribadi';
-    protected $fillable = ['id_user', 'foto_ktp', 'foto_kk', 'foto_user'];
+    protected $fillable = ['id_user', 'foto_ktp', 'foto_kk', 'foto_user', 'kartu_karyawan'];
 
     public function user()
     {

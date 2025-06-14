@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('nama');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('alamat');
-            $table->char('no_hp', 13);
+            $table->string('alamat')->nullable();
+            $table->char('no_hp', 13)->nullable();
             $table->enum('role', ['admin', 'karyawan'])->default('karyawan');
             $table->rememberToken();
             $table->timestamps();

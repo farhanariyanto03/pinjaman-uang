@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('foto_ktp')->nullable();
             $table->text('foto_kk')->nullable();
             $table->text('foto_user')->nullable();
+            $table->text('kartu_karyawan')->nullable();
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');

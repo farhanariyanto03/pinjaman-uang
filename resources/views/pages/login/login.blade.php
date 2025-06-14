@@ -54,7 +54,7 @@
                                 <span class="app-brand-text demo text-body fw-bolder">PINKAR</span>
                             </a>
                         </div>
-                        
+
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible" role="alert">
                                 @foreach ($errors->all() as $item)
@@ -133,6 +133,7 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    @include('sweetalert::alert')
 </body>
 
 </html>

@@ -54,37 +54,42 @@ class LoginController extends Controller
             'nama' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
-            'foto_user' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'foto_kk' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'alamat' => 'required',
+            // 'no_hp' => 'required',
+            // 'foto_user' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'foto_kk' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        // password dan confirm password harus sama
+        if ($validatedData['password'] !== $request->konfirmasi_password) {
+            return redirect()->back()->with('error', 'Password dan Konfirmasi Password tidak sama.');
+        }
 
         $user = User::create([
             'nama' => $validatedData['nama'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
-            'alamat' => $validatedData['alamat'],
-            'no_hp' => $validatedData['no_hp'],
             'role' => 'karyawan',
+            // 'alamat' => $validatedData['alamat'],
+            // 'no_hp' => $validatedData['no_hp'],
         ]);
 
-        $path = 'uploads/';
+        // $path = 'uploads/';
 
-        $fotoUser = $request->file('foto_user');
-        $fotoKK = $request->file('foto_kk');
-        $fotoKTP = $request->file('foto_ktp');
+        // $fotoUser = $request->file('foto_user');
+        // $fotoKK = $request->file('foto_kk');
+        // $fotoKTP = $request->file('foto_ktp');
 
-        $fotoUser->move(public_path($path . 'foto_user'), $fotoUser->getClientOriginalName());
-        $fotoKK->move(public_path($path . 'foto_kk'), $fotoKK->getClientOriginalName());
-        $fotoKTP->move(public_path($path . 'foto_ktp'), $fotoKTP->getClientOriginalName());
+        // $fotoUser->move(public_path($path . 'foto_user'), $fotoUser->getClientOriginalName());
+        // $fotoKK->move(public_path($path . 'foto_kk'), $fotoKK->getClientOriginalName());
+        // $fotoKTP->move(public_path($path . 'foto_ktp'), $fotoKTP->getClientOriginalName());
 
         InformasiPribadi::create([
             'id_user' => $user->id,
-            'foto_user' => $path . 'foto_user/' . $fotoUser->getClientOriginalName(),
-            'foto_kk' => $path . 'foto_kk/' . $fotoKK->getClientOriginalName(),
-            'foto_ktp' => $path . 'foto_ktp/' . $fotoKTP->getClientOriginalName(),
+            // 'foto_user' => $path . 'foto_user/' . $fotoUser->getClientOriginalName(),
+            // 'foto_kk' => $path . 'foto_kk/' . $fotoKK->getClientOriginalName(),
+            // 'foto_ktp' => $path . 'foto_ktp/' . $fotoKTP->getClientOriginalName(),
         ]);
 
         Alert::success('Berhasil', 'Registrasi Berhasil');
