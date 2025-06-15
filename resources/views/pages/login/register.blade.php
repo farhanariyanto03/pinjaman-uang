@@ -44,7 +44,7 @@
             <div class="authentication-inner">
                 <div class="card shadow-sm mx-auto">
                     <div class="card-body">
-                        
+
                         @if ($errors->any())
                             <div class="alert alert-danger alert-dismissible" role="alert">
                                 @foreach ($errors->all() as $item)
@@ -74,42 +74,15 @@
 
                             <!-- Biodata -->
                             <div class="mb-3">
+                                <label for="id_karyawan" class="form-label">ID Karyawan</label>
+                                <input type="text" class="form-control" id="id_karyawan" name="id"
+                                    placeholder="Masukkan ID Karyawan anda" value="{{ old('id') }}" maxlength="8" autofocus />
+                            </div>
+                            <div class="mb-3">
                                 <label for="nama" class="form-label">Nama Lengkap</label>
                                 <input type="text" class="form-control" id="nama" name="nama"
                                     placeholder="Masukkan nama anda" value="{{ old('nama') }}" autofocus />
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Alamat</label>
-                                <input type="text" class="form-control" name="alamat"
-                                    placeholder="Masukkan alamat" />
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">No HP</label>
-                                <input type="text" class="form-control" name="no_hp"
-                                    placeholder="Masukkan nomor HP" />
-                            </div>
-                            <!-- Foto Pribadi -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Foto Pribadi</label>
-                                <input type="file" class="form-control" name="foto_user"
-                                    onchange="previewImage(event, 'preview-foto-user')" />
-                            </div>
-
-                            <!-- Foto KTP -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Foto KTP</label>
-                                <input type="file" class="form-control" name="foto_ktp"
-                                    onchange="previewImage(event, 'preview-foto-ktp')" />
-                            </div>
-
-                            <!-- Foto KK -->
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Foto KK</label>
-                                <input type="file" class="form-control" name="foto_kk"
-                                    onchange="previewImage(event, 'preview-foto-kk')" />
-                            </div>
-
-                            <!-- Login -->
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="text" class="form-control" id="" name="email"
@@ -119,6 +92,14 @@
                                 <label for="password" class="form-label">Password</label>
                                 <div class="input-group input-group-merge">
                                     <input type="password" id="password" name="password" class="form-control"
+                                        placeholder="************" />
+                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                </div>
+                            </div>
+                            <div class="mb-3 form-password-toggle">
+                                <label for="konfirmasi_password" class="form-label">Konfirmasi Password</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="konfirmasi_password" name="konfirmasi_password" class="form-control"
                                         placeholder="************" />
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
