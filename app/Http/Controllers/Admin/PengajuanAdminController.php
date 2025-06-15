@@ -41,4 +41,18 @@ class PengajuanAdminController extends Controller
         Alert::success('Berhasil', 'Pengajuan ditolak')->autoClose(3000);
         return redirect()->route('admin.pengajuan');
     }
+
+    public function deleteAllStatusLunas()
+    {
+        PengajuanPinjaman::where('status', 'lunas')->delete();
+        Alert::success('Berhasil', 'Semua pengajuan lunas berhasil dihapus')->autoClose(3000);
+        return redirect()->route('admin.pengajuan');
+    }
+
+    public function deleteAllStatusDitolak()
+    {
+        PengajuanPinjaman::where('status', 'ditolak')->delete();
+        Alert::success('Berhasil', 'Semua pengajuan ditolak berhasil dihapus')->autoClose(3000);
+        return redirect()->route('admin.pengajuan');
+    }
 }

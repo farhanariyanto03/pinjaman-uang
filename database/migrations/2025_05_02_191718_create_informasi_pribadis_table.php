@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('informasi_pribadis', function (Blueprint $table) {
             $table->bigIncrements('id_informasi_pribadi');
-            $table->unsignedBigInteger('id_user');
+            $table->char('id_user', 8);
             $table->text('foto_ktp')->nullable();
             $table->text('foto_kk')->nullable();
             $table->text('foto_user')->nullable();

@@ -50,48 +50,41 @@ class LoginController extends Controller
 
     public function storeRegister(Request $request)
     {
+        // Validasi data input
         $validatedData = $request->validate([
+            'id' => 'required|string|size:8|unique:users,id',  // ID karyawan manual
             'nama' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            // 'alamat' => 'required',
-            // 'no_hp' => 'required',
-            // 'foto_user' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            // 'foto_kk' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            // 'foto_ktp' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'konfirmasi_password' => 'required|same:password', // pastikan cocok
         ]);
 
         // password dan confirm password harus sama
         if ($validatedData['password'] !== $request->konfirmasi_password) {
             return redirect()->back()->with('error', 'Password dan Konfirmasi Password tidak sama.');
         }
-
+        
         $user = User::create([
+            'id' => $validatedData['id'], // ID karyawan harus valid
             'nama' => $validatedData['nama'],
             'email' => $validatedData['email'],
             'password' => Hash::make($validatedData['password']),
             'role' => 'karyawan',
-            // 'alamat' => $validatedData['alamat'],
-            // 'no_hp' => $validatedData['no_hp'],
         ]);
 
-        // $path = 'uploads/';
-
-        // $fotoUser = $request->file('foto_user');
-        // $fotoKK = $request->file('foto_kk');
-        // $fotoKTP = $request->file('foto_ktp');
-
-        // $fotoUser->move(public_path($path . 'foto_user'), $fotoUser->getClientOriginalName());
-        // $fotoKK->move(public_path($path . 'foto_kk'), $fotoKK->getClientOriginalName());
-        // $fotoKTP->move(public_path($path . 'foto_ktp'), $fotoKTP->getClientOriginalName());
+        if (!$user || !$user->id) {
+            return redirect()->back()->with('error', 'Gagal menyimpan data user.');
+        }
 
         InformasiPribadi::create([
             'id_user' => $user->id,
-            // 'foto_user' => $path . 'foto_user/' . $fotoUser->getClientOriginalName(),
-            // 'foto_kk' => $path . 'foto_kk/' . $fotoKK->getClientOriginalName(),
-            // 'foto_ktp' => $path . 'foto_ktp/' . $fotoKTP->getClientOriginalName(),
+            'foto_ktp' => null,
+            'foto_kk' => null,
+            'foto_user' => null,
+            'kartu_karyawan' => null,
         ]);
 
+        // Berhasil
         Alert::success('Berhasil', 'Registrasi Berhasil');
         return redirect()->route('login');
     }

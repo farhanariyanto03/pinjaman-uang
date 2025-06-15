@@ -34,6 +34,8 @@ Route::prefix('adminn')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/pengajuan', [PengajuanAdminController::class, 'index'])->name('admin.pengajuan');
     Route::put('/pengajuan/{id_pengajuan_pinjaman}/diterima', [PengajuanAdminController::class, 'updateStatusDiterima'])->name('admin.pengajuan.diterima');
     Route::put('/pengajuan/{id_pengajuan_pinjaman}/ditolak', [PengajuanAdminController::class, 'updateStatusDitolak'])->name('admin.pengajuan.ditolak');
+    Route::delete('/pengajuan/hapus-lunas', [PengajuanAdminController::class, 'deleteAllStatusLunas'])->name('admin.pengajuan.hapus-lunas');
+    Route::delete('/pengajuan/hapus-ditolak', [PengajuanAdminController::class, 'deleteAllStatusDitolak'])->name('admin.pengajuan.hapus-ditolak');
     Route::get('/cicilan', [CicilanController::class, 'index'])->name('admin.cicilan');
     Route::put('/cicilan/{id_pembayaran_pinjaman}/diterima', [CicilanController::class, 'diterima'])->name('admin.cicilan.diterima');
     Route::put('/cicilan/{id_pembayaran_pinjaman}/ditolak', [CicilanController::class, 'ditolak'])->name('admin.cicilan.ditolakk');

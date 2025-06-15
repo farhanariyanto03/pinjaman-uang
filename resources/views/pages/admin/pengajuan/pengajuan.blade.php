@@ -63,7 +63,7 @@
                                             <td>{{ $p->tenor }} Bulan</td>
                                             <td>Rp. {{ number_format($p->angsuran_per_bulanan, 0, ',', '.') }}</span>
                                             </td>
-                                            <td>{{ $p->detailPinjaman->alasan_peminjaman }}</td>
+                                            <td>{{ $p->detailPinjaman->alasan_peminjaman ?? '-' }}</td>
                                             <td>{{ $p->created_at->format('d-m-Y') }}</td>
                                             <td>
                                                 <span
@@ -106,6 +106,7 @@
                             </table>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
                         <div class="table-responsive">
                             <table class="table table-hover large w-full" id="myTable1">
@@ -137,7 +138,7 @@
                                             <td>Rp. {{ number_format($p->angsuran_per_bulanan, 0, ',', '.') }}</span>
                                             <td>Rp. {{ number_format($p->jumlah_kotor, 0, ',', '.') }}</span>
                                             </td>
-                                            <td>{{ $p->detailPinjaman->alasan_peminjaman }}</td>
+                                            <td>{{ $p->detailPinjaman->alasan_peminjaman ?? '-' }}</td>
                                             <td>{{ $p->created_at->format('d-m-Y') }}</td>
                                             <td>{{ $p->updated_at->format('d-m-Y') }}</td>
                                             <td>
@@ -152,6 +153,7 @@
                             </table>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
                         <div class="table-responsive">
                             <table class="table table-hover large" id="myTable2">
@@ -181,7 +183,7 @@
                                             <td>{{ $p->tenor }} Bulan</td>
                                             <td>Rp. {{ number_format($p->angsuran_per_bulanan, 0, ',', '.') }}</span>
                                             </td>
-                                            <td>{{ $p->detailPinjaman->alasan_peminjaman }}</td>
+                                            <td>{{ $p->detailPinjaman->alasan_peminjaman ?? '-' }}</td>
                                             <td>{{ $p->created_at->format('d-m-Y') }}</td>
                                             <td>{{ $p->updated_at->format('d-m-Y') }}</td>
                                             <td>
@@ -194,8 +196,16 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="btn">
+                                <form action="{{ route('admin.pengajuan.hapus-lunas') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-xs btn-outline-light"><i class="bx bx-trash bx-xxs me-1"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
+
                     <div class="tab-pane fade" id="navs-pills-top-ditolak" role="tabpanel">
                         <div class="table-responsive">
                             <table class="table table-hover large" id="myTable3">
@@ -225,7 +235,7 @@
                                             <td>{{ $p->tenor }} Bulan</td>
                                             <td>Rp. {{ number_format($p->angsuran_per_bulanan, 0, ',', '.') }}</span>
                                             </td>
-                                            <td>{{ $p->detailPinjaman->alasan_peminjaman }}</td>
+                                            <td>{{ $p->detailPinjaman->alasan_peminjaman ?? '-' }}</td>
                                             <td>{{ $p->created_at->format('d-m-Y') }}</td>
                                             <td>{{ $p->updated_at->format('d-m-Y') }}</td>
                                             <td>
@@ -238,40 +248,18 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <div class="btn">
+                                <form action="{{ route('admin.pengajuan.hapus-ditolak') }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-xs btn-outline-light"><i class="bx bx-trash bx-xxs me-1"></i></button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    {{-- @foreach ($pengajuan_menunggu as $p)
-        <div class="modal fade" id="editPengajuan{{ $p->id_pengajuan_pinjaman }}" data-bs-backdrop="static" tabindex="-1">
-            <div class="modal-dialog">
-                <form action="{{ route('admin.pengajuan.diterima', $p->id_pengajuan_pinjaman) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Pengajuan Pinjaman</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label class="form-label">Bunga (%)</label>
-                                <input type="number" class="form-control" name="bunga" placeholder="Masukkan Bunga"
-                                    required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary"
-                                data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endforeach --}}
     @include('sweetalert::alert')
 @endsection

@@ -34,16 +34,6 @@
                                 value="{{ Auth::user()->nama }}" autofocus />
                         </div>
                         <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">Alamat</label>
-                            <input class="form-control" type="text" name="alamat" id="lastName"
-                                value="{{ Auth::user()->alamat ?? '' }}" />
-                        </div>
-                        <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">No HP</label>
-                            <input class="form-control" type="text" name="no_hp" id="lastName"
-                                value="{{ Auth::user()->no_hp ?? '' }}" />
-                        </div>
-                        <div class="mb-3 col-md-6">
                             <label for="lastName" class="form-label">Role</label>
                             <input class="form-control" type="text" name="role" id="lastName"
                                 value="{{ Auth::user()->role }}" disabled />
@@ -60,34 +50,6 @@
                                 aria-describedby="password" value="" />
                             <p class="text-danger">* Kosongkan jika tidak ingin mengganti password</p>
                         </div>
-
-                        <div class="mb-3 col-md-4">
-                            <label class="form-label">Foto KK</label><br>
-                            <img id="previewFotoKK" src="{{ asset(Auth::user()->informasiPribadi->foto_kk ?: 'admin/img/elements/12.jpg') }}"
-                                alt="Foto KK" style="width:400px; height:150px; border-radius:5px;">
-                            <input type="file" id="fotoKKInput" name="foto_kk" class="form-control mt-2"
-                                accept="image/*" />
-                        </div>
-
-                        <div class="mb-3 col-md-4">
-                            <label class="form-label">Foto KTP</label><br>
-                            <img id="previewFotoKTP"
-                                src="{{ asset(Auth::user()->informasiPribadi->foto_ktp ?: 'admin/img/elements/13.jpg') }}"
-                                alt="Foto KTP" style="width:400px; height:150px; border-radius:5px;">
-                            <input type="file" id="fotoKTPInput" name="foto_ktp" class="form-control mt-2"
-                                accept="image/*" />
-                        </div>
-
-                        <div class="mb-3 col-md-4">
-                            <label class="form-label">Kartu Karyawan</label><br>
-                            <img id="previewKartuKaryawan"
-                                src="{{ asset(Auth::user()->informasiPribadi->kartu_karyawan ?: 'admin/img/elements/13.jpg') }}"
-                                alt="Foto KTP" style="width:400px; height:150px; border-radius:5px;">
-                            <input type="file" id="kartuKaryawanInput" name="kartu_karyawan" class="form-control mt-2"
-                                accept="image/*" />
-                        </div>
-
-                    </div>
                     <div class="mt-2">
                         <button type="submit" class="btn btn-primary me-2">Update</button>
                     </div>
@@ -95,36 +57,6 @@
             </form>
         </div>
     </div>
-
-    <script>
-        function previewFile(input, previewId) {
-            const preview = document.getElementById(previewId);
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = e => {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        document.getElementById('upload').addEventListener('change', e => {
-            previewFile(e.target, 'previewFotoUser');
-        });
-
-        document.getElementById('fotoKKInput').addEventListener('change', e => {
-            previewFile(e.target, 'previewFotoKK');
-        });
-
-        document.getElementById('fotoKTPInput').addEventListener('change', e => {
-            previewFile(e.target, 'previewFotoKTP');
-        });
-
-        document.getElementById('kartuKaryawanInput').addEventListener('change', e => {
-            previewFile(e.target, 'previewKartuKaryawan');
-        });
-    </script>
 
     @include('sweetalert::alert')
 @endsection
